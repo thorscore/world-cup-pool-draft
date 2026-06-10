@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World Cup Pool Draft</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23167d5d'/%3E%3Cpath d='M32 10 44 24 38 46H26L20 24z' fill='white'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #627084;
+      --line: #d8e0e8;
+      --paper: #f7f5ee;
+      --panel: #ffffff;
+      --green: #167d5d;
+      --green-dark: #0d6047;
+      --red: #c24a3a;
+      --gold: #d99a21;
+      --blue: #2766a8;
+      --shadow: 0 14px 34px rgba(23, 33, 43, .12);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(22,125,93,.12), transparent 24rem),
+        linear-gradient(135deg, #f6f2e7 0%, #eef4f7 58%, #f9fbf9 100%);
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 0 13px;
+      color: #fff;
+      background: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    button:hover { filter: brightness(.96); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    button.secondary { background: #e8edf2; color: var(--ink); }
+    button.green { background: var(--green); }
+    button.red { background: var(--red); }
+    button.gold { background: var(--gold); color: #22170a; }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 10px;
+      min-height: 38px;
+    }
+
+    textarea {
+      min-height: 210px;
+      resize: vertical;
+      line-height: 1.4;
+    }
+
+    .app {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 24px 18px 42px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      padding: 22px 0 18px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 6px;
+      font-size: clamp(2rem, 5vw, 4.6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 0;
+      font-size: 1.02rem;
+    }
+
+    .hero-ball {
+      width: min(210px, 28vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        linear-gradient(36deg, transparent 0 41%, rgba(23,33,43,.16) 42% 45%, transparent 46%),
+        linear-gradient(144deg, transparent 0 41%, rgba(23,33,43,.16) 42% 45%, transparent 46%),
+        radial-gradient(circle at 50% 50%, #fff 0 18%, #111 19% 31%, transparent 32%),
+        conic-gradient(from 18deg, #fff 0 13%, #111 13% 20%, #fff 20% 38%, #111 38% 45%, #fff 45% 63%, #111 63% 70%, #fff 70% 88%, #111 88% 95%, #fff 95%);
+      box-shadow: var(--shadow);
+      border: 10px solid rgba(255,255,255,.76);
+      justify-self: end;
+    }
+
+    nav {
+      display: flex;
+      gap: 7px;
+      padding: 7px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(216,224,232,.9);
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 18px;
+    }
+
+    nav button {
+      background: transparent;
+      color: var(--muted);
+      min-width: 112px;
+    }
+
+    nav button.active {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .panel {
+      display: none;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(216,224,232,.9);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(23,33,43,.06);
+    }
+
+    .panel.active { display: block; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 { margin-bottom: 3px; }
+    .section-title p { margin-bottom: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: .84rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .row {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .stack { display: grid; gap: 10px; }
+    .actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #edf3f0;
+      color: var(--green-dark);
+      font-weight: 750;
+      font-size: .86rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #eff4f5;
+      color: #405166;
+      font-size: .82rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .draft-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .player-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 178px;
+    }
+
+    .player-card.current {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(217,154,33,.18);
+    }
+
+    .player-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .team-chip {
+      display: flex;
+      justify-content: space-between;
+      gap: 9px;
+      align-items: center;
+      background: #f5f7f9;
+      border: 1px solid #e3e9ef;
+      border-radius: 7px;
+      padding: 8px 9px;
+      min-height: 38px;
+      margin-bottom: 7px;
+    }
+
+    .team-chip small { color: var(--muted); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+      gap: 8px;
+      max-height: 520px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .team-button {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      min-height: 46px;
+      justify-content: space-between;
+      padding: 7px 10px;
+    }
+
+    .team-button:hover { border-color: var(--green); }
+    .team-button[disabled] { text-decoration: line-through; }
+
+    .leader {
+      display: grid;
+      gap: 8px;
+    }
+
+    .leader-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 82px;
+      gap: 10px;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .rank {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .bar {
+      height: 9px;
+      border-radius: 999px;
+      background: #edf1f4;
+      margin-top: 7px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--gold), var(--blue));
+      width: 0%;
+    }
+
+    .muted { color: var(--muted); }
+    .right { text-align: right; }
+    .hidden { display: none !important; }
+
+    .scoring-table input, .results-table input {
+      min-width: 72px;
+      max-width: 90px;
+    }
+
+    .notice {
+      background: #fff8e6;
+      color: #6c4a05;
+      border: 1px solid #f1d99f;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: .86rem;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 820px) {
+      header { grid-template-columns: 1fr; }
+      .hero-ball { display: none; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+      .section-title { align-items: flex-start; flex-direction: column; }
+      .leader-row { grid-template-columns: 34px 1fr 66px; }
+      th, td { padding: 8px; }
+      .panel { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>World Cup Pool Draft</h1>
+        <p class="subtitle">Run a 2026 pool for up to 12 people, draft 4 teams each, enter wins and ties by round, and keep the leaderboard in one free static page.</p>
+      </div>
+      <div class="hero-ball" aria-hidden="true"></div>
+    </header>
+
+    <nav aria-label="App sections">
+      <button class="active" data-tab="setup" title="Setup">Setup</button>
+      <button data-tab="draft" title="Draft">Draft</button>
+      <button data-tab="scoring" title="Scoring">Scoring</button>
+      <button data-tab="results" title="Results">Results</button>
+      <button data-tab="leaderboard" title="Leaderboard">Leaderboard</button>
+    </nav>
+
+    <section id="setup" class="panel active">
+      <div class="section-title">
+        <div>
+          <h2>Setup</h2>
+          <p>Add pool members, confirm the team list, then start the draft.</p>
+        </div>
+        <span class="pill" id="setup-count">0 players</span>
+      </div>
+      <div class="grid">
+        <div class="box span-5">
+          <label class="label" for="player-name">Pool member</label>
+          <div class="row">
+            <input id="player-name" placeholder="Name" maxlength="28" />
+            <button class="green" id="add-player">Add</button>
+          </div>
+          <div id="players-list" class="stack" style="margin-top:12px;"></div>
+        </div>
+        <div class="box span-7">
+          <label class="label" for="teams-input">Teams</label>
+          <textarea id="teams-input"></textarea>
+          <div class="actions">
+            <button class="secondary" id="save-teams">Save Teams</button>
+            <button class="secondary" id="restore-teams">Restore 2026 List</button>
+            <button class="red" id="reset-all">Reset Pool</button>
+          </div>
+        </div>
+        <div class="box span-12">
+          <div class="row">
+            <button class="green" id="start-draft">Start Draft</button>
+            <button class="secondary" id="export-data">Export Pool</button>
+            <label class="secondary button-like" for="import-file"></label>
+            <input id="import-file" type="file" accept="application/json" class="hidden" />
+            <button class="secondary" id="import-click">Import Pool</button>
+            <span class="muted" id="setup-hint"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="draft" class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Draft</h2>
+          <p>Snake draft, 4 teams per person. Pick the current person&apos;s team from the available list.</p>
+        </div>
+        <span class="pill" id="draft-status">Not started</span>
+      </div>
+      <div id="draft-notice" class="notice hidden"></div>
+      <div class="grid">
+        <div class="span-7">
+          <div id="draft-board" class="draft-board"></div>
+        </div>
+        <div class="box span-5">
+          <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+            <strong id="current-picker">Current pick</strong>
+            <button class="secondary" id="undo-pick">Undo</button>
+          </div>
+          <input id="team-search" placeholder="Search teams" style="margin-bottom:10px;" />
+          <div id="available-teams" class="team-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scoring" class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Scoring</h2>
+          <p>Set how much each win or tie is worth in each round.</p>
+        </div>
+        <button class="secondary" id="restore-scoring">Restore Defaults</button>
+      </div>
+      <div class="box">
+        <table class="scoring-table">
+          <thead>
+            <tr><th>Round</th><th>Win</th><th>Tie</th></tr>
+          </thead>
+          <tbody id="scoring-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="results" class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Results</h2>
+          <p>Enter each drafted team&apos;s wins and ties by round. Scores update immediately.</p>
+        </div>
+        <span class="pill" id="results-total">0 teams</span>
+      </div>
+      <div class="box" style="overflow:auto;">
+        <table class="results-table">
+          <thead id="results-head"></thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="leaderboard" class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Leaderboard</h2>
+          <p>Pool totals are calculated from the teams each person drafted.</p>
+        </div>
+        <button class="gold" id="copy-standings">Copy Standings</button>
+      </div>
+      <div id="leaderboard-list" class="leader"></div>
+    </section>
+
+    <footer>
+      Team list seeded from 2026 World Cup group listings published by FIFA/standings sources and FOX Sports standings as checked on June 10, 2026. The app saves in this browser only; use Export Pool to share or back it up.
+    </footer>
+  </main>
+
+  <script>
+    const DEFAULT_TEAMS = [
+      { group: "A", name: "Mexico" }, { group: "A", name: "South Africa" }, { group: "A", name: "South Korea" }, { group: "A", name: "Czechia" },
+      { group: "B", name: "Canada" }, { group: "B", name: "Bosnia and Herzegovina" }, { group: "B", name: "Qatar" }, { group: "B", name: "Switzerland" },
+      { group: "C", name: "Brazil" }, { group: "C", name: "Morocco" }, { group: "C", name: "Haiti" }, { group: "C", name: "Scotland" },
+      { group: "D", name: "United States" }, { group: "D", name: "Paraguay" }, { group: "D", name: "Australia" }, { group: "D", name: "Turkiye" },
+      { group: "E", name: "Germany" }, { group: "E", name: "Curacao" }, { group: "E", name: "Ivory Coast" }, { group: "E", name: "Ecuador" },
+      { group: "F", name: "Netherlands" }, { group: "F", name: "Japan" }, { group: "F", name: "Sweden" }, { group: "F", name: "Tunisia" },
+      { group: "G", name: "Belgium" }, { group: "G", name: "Egypt" }, { group: "G", name: "Iran" }, { group: "G", name: "New Zealand" },
+      { group: "H", name: "Spain" }, { group: "H", name: "Cape Verde" }, { group: "H", name: "Saudi Arabia" }, { group: "H", name: "Uruguay" },
+      { group: "I", name: "France" }, { group: "I", name: "Senegal" }, { group: "I", name: "Iraq" }, { group: "I", name: "Norway" },
+      { group: "J", name: "Argentina" }, { group: "J", name: "Algeria" }, { group: "J", name: "Austria" }, { group: "J", name: "Jordan" },
+      { group: "K", name: "Portugal" }, { group: "K", name: "DR Congo" }, { group: "K", name: "Uzbekistan" }, { group: "K", name: "Colombia" },
+      { group: "L", name: "England" }, { group: "L", name: "Croatia" }, { group: "L", name: "Ghana" }, { group: "L", name: "Panama" }
+    ];
+
+    const DEFAULT_ROUNDS = [
+      { id: "group", label: "Group Stage", win: 3, tie: 1 },
+      { id: "r32", label: "Round of 32", win: 4, tie: 2 },
+      { id: "r16", label: "Round of 16", win: 5, tie: 2 },
+      { id: "qf", label: "Quarterfinal", win: 6, tie: 3 },
+      { id: "sf", label: "Semifinal", win: 8, tie: 4 },
+      { id: "final", label: "Final", win: 10, tie: 5 }
+    ];
+
+    const STORAGE_KEY = "worldCupPoolDraft.v1";
+    const state = loadState();
+
+    function freshState() {
+      return {
+        players: [],
+        teams: DEFAULT_TEAMS,
+        rounds: DEFAULT_ROUNDS,
+        picks: [],
+        draftStarted: false,
+        results: {}
+      };
+    }
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (!saved || !Array.isArray(saved.players)) return freshState();
+        return {
+          ...freshState(),
+          ...saved,
+          rounds: mergeRounds(saved.rounds || DEFAULT_ROUNDS),
+          teams: saved.teams && saved.teams.length ? saved.teams : DEFAULT_TEAMS
+        };
+      } catch {
+        return freshState();
+      }
+    }
+
+    function mergeRounds(rounds) {
+      return DEFAULT_ROUNDS.map(def => ({ ...def, ...(rounds.find(r => r.id === def.id) || {}) }));
+    }
+
+    function save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function $(selector) { return document.querySelector(selector); }
+    function $all(selector) { return Array.from(document.querySelectorAll(selector)); }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    }
+
+    function teamId(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function parseTeamText(text) {
+      return text.split(/\n+/).map(line => line.trim()).filter(Boolean).map(line => {
+        const groupMatch = line.match(/^([A-L])\s*[-:]\s*(.+)$/i);
+        if (groupMatch) return { group: groupMatch[1].toUpperCase(), name: groupMatch[2].trim() };
+        return { group: "", name: line };
+      });
+    }
+
+    function teamText(teams) {
+      return teams.map(t => `${t.group ? t.group + " - " : ""}${t.name}`).join("\n");
+    }
+
+    function draftOrder() {
+      const ids = state.players.map(p => p.id);
+      const order = [];
+      for (let round = 0; round < 4; round++) {
+        const lane = round % 2 === 0 ? ids : [...ids].reverse();
+        order.push(...lane);
+      }
+      return order;
+    }
+
+    function currentPlayerId() {
+      return draftOrder()[state.picks.length];
+    }
+
+    function pickedTeams() {
+      return new Set(state.picks.map(p => p.team));
+    }
+
+    function playerScore(playerId) {
+      return state.picks.filter(p => p.playerId === playerId).reduce((sum, pick) => sum + teamScore(pick.team), 0);
+    }
+
+    function teamScore(teamName) {
+      const result = state.results[teamName] || {};
+      return state.rounds.reduce((sum, round) => {
+        const wins = Number(result[`${round.id}Wins`] || 0);
+        const ties = Number(result[`${round.id}Ties`] || 0);
+        return sum + wins * Number(round.win || 0) + ties * Number(round.tie || 0);
+      }, 0);
+    }
+
+    function render() {
+      renderSetup();
+      renderDraft();
+      renderScoring();
+      renderResults();
+      renderLeaderboard();
+      save();
+    }
+
+    function renderSetup() {
+      $("#setup-count").textContent = `${state.players.length} player${state.players.length === 1 ? "" : "s"}`;
+      $("#teams-input").value = teamText(state.teams);
+      $("#setup-hint").textContent = state.players.length ? `${state.players.length * 4} total teams will be drafted.` : "Add at least 2 people to begin.";
+      $("#players-list").innerHTML = state.players.length ? state.players.map((player, index) => `
+        <div class="team-chip">
+          <span>${index + 1}. ${escapeHtml(player.name)}</span>
+          <button class="secondary" data-remove-player="${player.id}" title="Remove">Remove</button>
+        </div>
+      `).join("") : `<p class="muted">No players yet.</p>`;
+      $all("[data-remove-player]").forEach(button => button.addEventListener("click", () => {
+        removePlayer(button.dataset.removePlayer);
+      }));
+      $("#start-draft").disabled = state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4;
+    }
+
+    function renderDraft() {
+      const order = draftOrder();
+      const done = state.draftStarted && state.picks.length >= order.length;
+      const currentId = currentPlayerId();
+      const current = state.players.find(p => p.id === currentId);
+      $("#draft-status").textContent = !state.draftStarted ? "Not started" : done ? "Draft complete" : `Pick ${state.picks.length + 1} of ${order.length}`;
+      $("#current-picker").textContent = current && !done ? `${current.name} is picking` : done ? "Draft complete" : "Start the draft from Setup";
+      $("#undo-pick").disabled = state.picks.length === 0;
+      const notice = $("#draft-notice");
+      notice.classList.toggle("hidden", state.draftStarted);
+      notice.textContent = "Start the draft from Setup after adding players.";
+      $("#draft-board").innerHTML = state.players.map(player => {
+        const picks = state.picks.filter(p => p.playerId === player.id);
+        return `
+          <article class="player-card ${player.id === currentId && !done ? "current" : ""}">
+            <div class="player-head">
+              <span>${escapeHtml(player.name)}</span>
+              <span class="pill">${picks.length}/4</span>
+            </div>
+            ${[0,1,2,3].map(i => picks[i] ? `<div class="team-chip"><span>${escapeHtml(picks[i].team)}</span><small>${escapeHtml(picks[i].group || "")}</small></div>` : `<div class="team-chip muted"><span>Pick ${i + 1}</span><small>Open</small></div>`).join("")}
+          </article>
+        `;
+      }).join("");
+      const selected = pickedTeams();
+      const q = $("#team-search").value.trim().toLowerCase();
+      $("#available-teams").innerHTML = state.teams
+        .filter(t => !q || t.name.toLowerCase().includes(q) || t.group.toLowerCase().includes(q))
+        .map(team => `
+          <button class="team-button" data-pick-team="${escapeHtml(team.name)}" ${selected.has(team.name) || !state.draftStarted || done ? "disabled" : ""}>
+            <span>${escapeHtml(team.name)}</span><small>${escapeHtml(team.group)}</small>
+          </button>
+        `).join("");
+      $all("[data-pick-team]").forEach(button => button.addEventListener("click", () => makePick(button.dataset.pickTeam)));
+    }
+
+    function renderScoring() {
+      $("#scoring-body").innerHTML = state.rounds.map(round => `
+        <tr>
+          <td><strong>${escapeHtml(round.label)}</strong></td>
+          <td><input type="number" min="0" step="1" value="${round.win}" data-score="${round.id}:win" /></td>
+          <td><input type="number" min="0" step="1" value="${round.tie}" data-score="${round.id}:tie" /></td>
+        </tr>
+      `).join("");
+      $all("[data-score]").forEach(input => input.addEventListener("input", () => {
+        const [id, key] = input.dataset.score.split(":");
+        const round = state.rounds.find(r => r.id === id);
+        round[key] = Number(input.value || 0);
+        renderResults();
+        renderLeaderboard();
+        save();
+      }));
+    }
+
+    function renderResults() {
+      const drafted = state.picks.map(pick => ({ ...pick, player: state.players.find(p => p.id === pick.playerId)?.name || "" }));
+      $("#results-total").textContent = `${drafted.length} drafted team${drafted.length === 1 ? "" : "s"}`;
+      $("#results-head").innerHTML = `
+        <tr>
+          <th>Team</th>
+          <th>Owner</th>
+          ${state.rounds.map(r => `<th>${escapeHtml(r.label)} W</th><th>${escapeHtml(r.label)} T</th>`).join("")}
+          <th class="right">Pts</th>
+        </tr>
+      `;
+      $("#results-body").innerHTML = drafted.length ? drafted.map(pick => {
+        const result = state.results[pick.team] || {};
+        return `
+          <tr>
+            <td><strong>${escapeHtml(pick.team)}</strong><div class="muted">Group ${escapeHtml(pick.group || "")}</div></td>
+            <td>${escapeHtml(pick.player)}</td>
+            ${state.rounds.map(r => `
+              <td><input type="number" min="0" step="1" value="${result[`${r.id}Wins`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Wins" /></td>
+              <td><input type="number" min="0" step="1" value="${result[`${r.id}Ties`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Ties" /></td>
+            `).join("")}
+            <td class="right"><strong>${teamScore(pick.team)}</strong></td>
+          </tr>
+        `;
+      }).join("") : `<tr><td colspan="${3 + state.rounds.length * 2}">No drafted teams yet.</td></tr>`;
+      $all("[data-result]").forEach(input => input.addEventListener("input", () => {
+        const [team, field] = input.dataset.result.split(":");
+        state.results[team] = state.results[team] || {};
+        state.results[team][field] = Number(input.value || 0);
+        renderResults();
+        renderLeaderboard();
+        save();
+      }));
+    }
+
+    function renderLeaderboard() {
+      const rows = state.players.map(player => ({
+        ...player,
+        score: playerScore(player.id),
+        teams: state.picks.filter(p => p.playerId === player.id).map(p => p.team)
+      })).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+      const max = Math.max(1, ...rows.map(r => r.score));
+      $("#leaderboard-list").innerHTML = rows.length ? rows.map((player, index) => `
+        <div class="leader-row">
+          <div class="rank">${index + 1}</div>
+          <div>
+            <strong>${escapeHtml(player.name)}</strong>
+            <div class="muted">${player.teams.length ? escapeHtml(player.teams.join(", ")) : "No teams drafted yet"}</div>
+            <div class="bar"><span style="width:${Math.round((player.score / max) * 100)}%"></span></div>
+          </div>
+          <div class="right"><strong>${player.score}</strong><div class="muted">pts</div></div>
+        </div>
+      `).join("") : `<div class="notice">Add players in Setup to build the leaderboard.</div>`;
+    }
+
+    function removePlayer(id) {
+      if (state.draftStarted && state.picks.length) {
+        alert("Reset the draft before removing players.");
+        return;
+      }
+      state.players = state.players.filter(p => p.id !== id);
+      render();
+    }
+
+    function makePick(teamName) {
+      const playerId = currentPlayerId();
+      const player = state.players.find(p => p.id === playerId);
+      const team = state.teams.find(t => t.name === teamName);
+      if (!player || !team || pickedTeams().has(teamName)) return;
+      state.picks.push({ playerId, team: team.name, group: team.group });
+      render();
+    }
+
+    $("#add-player").addEventListener("click", () => {
+      const name = $("#player-name").value.trim();
+      if (!name || state.players.length >= 12) return;
+      state.players.push({ id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()), name });
+      $("#player-name").value = "";
+      render();
+    });
+
+    $("#player-name").addEventListener("keydown", event => {
+      if (event.key === "Enter") $("#add-player").click();
+    });
+
+    $("#save-teams").addEventListener("click", () => {
+      const teams = parseTeamText($("#teams-input").value);
+      const seen = new Set();
+      state.teams = teams.filter(t => {
+        const id = teamId(t.name);
+        if (!id || seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      });
+      state.picks = state.picks.filter(p => state.teams.some(t => t.name === p.team));
+      render();
+    });
+
+    $("#restore-teams").addEventListener("click", () => {
+      state.teams = DEFAULT_TEAMS;
+      render();
+    });
+
+    $("#start-draft").addEventListener("click", () => {
+      if (state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4) return;
+      if (state.picks.length && !confirm("Restart the draft and clear existing picks?")) return;
+      state.draftStarted = true;
+      state.picks = [];
+      state.results = {};
+      switchTab("draft");
+      render();
+    });
+
+    $("#undo-pick").addEventListener("click", () => {
+      state.picks.pop();
+      render();
+    });
+
+    $("#team-search").addEventListener("input", renderDraft);
+
+    $("#restore-scoring").addEventListener("click", () => {
+      state.rounds = DEFAULT_ROUNDS.map(r => ({ ...r }));
+      render();
+    });
+
+    $("#reset-all").addEventListener("click", () => {
+      if (!confirm("Clear players, draft picks, and scores?")) return;
+      Object.assign(state, freshState());
+      render();
+    });
+
+    $("#export-data").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "world-cup-pool.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    $("#import-click").addEventListener("click", () => $("#import-file").click());
+    $("#import-file").addEventListener("change", async event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const imported = JSON.parse(await file.text());
+        Object.assign(state, freshState(), imported);
+        state.rounds = mergeRounds(state.rounds);
+        render();
+      } catch {
+        alert("That file could not be imported.");
+      }
+      event.target.value = "";
+    });
+
+    $("#copy-standings").addEventListener("click", async () => {
+      const text = state.players.map(p => ({ name: p.name, score: playerScore(p.id) }))
+        .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+        .map((p, i) => `${i + 1}. ${p.name} - ${p.score} pts`).join("\n");
+      await navigator.clipboard.writeText(text || "No standings yet");
+      $("#copy-standings").textContent = "Copied";
+      setTimeout(() => $("#copy-standings").textContent = "Copy Standings", 1000);
+    });
+
+    $all("nav button").forEach(button => {
+      button.addEventListener("click", () => switchTab(button.dataset.tab));
+    });
+
+    function switchTab(id) {
+      $all("nav button").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === id));
+      $all(".panel").forEach(panel => panel.classList.toggle("active", panel.id === id));
+    }
+
+    render();
+  </script>
+</body>
+</html>
