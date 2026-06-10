@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>World Cup Pool Draft</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23167d5d'/%3E%3Cpath d='M32 10 44 24 38 46H26L20 24z' fill='white'/%3E%3C/svg%3E" />
+  <script src="config.js"></script>
   <style>
     :root {
       --ink: #17212b;
@@ -397,6 +398,7 @@
       <button data-tab="scoring" title="Scoring">Scoring</button>
       <button data-tab="results" title="Results">Results</button>
       <button data-tab="leaderboard" title="Leaderboard">Leaderboard</button>
+      <button data-tab="room" title="Room">Room</button>
     </nav>
 
     <section id="setup" class="panel active">
@@ -512,6 +514,48 @@
       <div id="leaderboard-list" class="leader"></div>
     </section>
 
+    <section id="room" class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Live Room</h2>
+          <p>Create a shared draft room with admin, player, and spectator access.</p>
+        </div>
+        <span class="pill" id="room-status">Offline</span>
+      </div>
+      <div id="room-message" class="notice hidden"></div>
+      <div class="grid">
+        <div class="box span-6">
+          <h3>Connection</h3>
+          <label class="label" for="supabase-url">Supabase Project URL</label>
+          <input id="supabase-url" placeholder="https://your-project.supabase.co" />
+          <label class="label" for="supabase-key" style="margin-top:10px;">Supabase anon public key</label>
+          <input id="supabase-key" placeholder="eyJ..." />
+          <div class="actions">
+            <button class="secondary" id="save-supabase">Save Connection</button>
+            <button class="green" id="create-room">Create Live Room</button>
+          </div>
+        </div>
+        <div class="box span-6">
+          <h3>Join</h3>
+          <label class="label" for="room-code">Room code</label>
+          <input id="room-code" placeholder="ABC123" />
+          <label class="label" for="room-token" style="margin-top:10px;">Access key</label>
+          <input id="room-token" placeholder="Admin, player, or spectator key" />
+          <div class="actions">
+            <button class="green" id="join-room">Join Room</button>
+            <button class="secondary" id="leave-room">Leave Room</button>
+          </div>
+        </div>
+        <div class="box span-12">
+          <div class="row" style="justify-content:space-between;">
+            <h3 style="margin-bottom:0;">Room Links</h3>
+            <button class="secondary" id="copy-room-summary">Copy Links</button>
+          </div>
+          <div id="room-links" class="stack" style="margin-top:12px;"></div>
+        </div>
+      </div>
+    </section>
+
     <footer>
       Team list seeded from 2026 World Cup group listings published by FIFA/standings sources and FOX Sports standings as checked on June 10, 2026. The app saves in this browser only; use Export Pool to share or back it up.
     </footer>
@@ -543,8 +587,13 @@
     ];
 
     const STORAGE_KEY = "worldCupPoolDraft.v1";
+    const ROOM_KEY = "worldCupPoolDraft.room.v1";
+    const SUPABASE_KEY = "worldCupPoolDraft.supabase.v1";
     const state = loadState();
+    const room = loadRoom();
+    const supabaseConfig = loadSupabaseConfig();
     let syncTimer = null;
+    let roomTimer = null;
 
     function freshState() {
       return {
@@ -574,12 +623,52 @@
       }
     }
 
+    function loadRoom() {
+      const params = new URLSearchParams(location.search);
+      const fromUrl = params.get("room") && params.get("token") ? { code: params.get("room"), token: params.get("token") } : {};
+      try {
+        return {
+          connected: false,
+          role: "offline",
+          playerId: null,
+          playerName: "",
+          playerLinks: [],
+          spectatorToken: "",
+          ...(JSON.parse(localStorage.getItem(ROOM_KEY)) || {}),
+          ...fromUrl
+        };
+      } catch {
+        return { connected: false, role: "offline", playerId: null, playerName: "", playerLinks: [], spectatorToken: "", ...fromUrl };
+      }
+    }
+
+    function loadSupabaseConfig() {
+      const fallback = window.WC_POOL_CONFIG || {};
+      try {
+        return {
+          url: fallback.supabaseUrl || "",
+          anonKey: fallback.supabaseAnonKey || "",
+          ...(JSON.parse(localStorage.getItem(SUPABASE_KEY)) || {})
+        };
+      } catch {
+        return { url: fallback.supabaseUrl || "", anonKey: fallback.supabaseAnonKey || "" };
+      }
+    }
+
     function mergeRounds(rounds) {
       return DEFAULT_ROUNDS.map(def => ({ ...def, ...(rounds.find(r => r.id === def.id) || {}) }));
     }
 
     function save() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function saveRoom() {
+      localStorage.setItem(ROOM_KEY, JSON.stringify(room));
+    }
+
+    function saveSupabaseConfig() {
+      localStorage.setItem(SUPABASE_KEY, JSON.stringify(supabaseConfig));
     }
 
     function $(selector) { return document.querySelector(selector); }
@@ -642,23 +731,39 @@
       renderScoring();
       renderResults();
       renderLeaderboard();
+      renderRoom();
       save();
+    }
+
+    function isAdmin() {
+      return !room.connected || room.role === "admin";
+    }
+
+    function canDraftCurrent() {
+      if (!room.connected || room.role === "admin") return true;
+      return room.role === "player" && currentPlayerId() === room.playerId;
     }
 
     function renderSetup() {
       $("#setup-count").textContent = `${state.players.length} player${state.players.length === 1 ? "" : "s"}`;
       $("#teams-input").value = teamText(state.teams);
       $("#setup-hint").textContent = state.players.length ? `${state.players.length * 4} total teams will be drafted.` : "Add at least 2 people to begin.";
+      $("#player-name").disabled = !isAdmin();
+      $("#add-player").disabled = !isAdmin();
+      $("#teams-input").disabled = !isAdmin();
+      $("#save-teams").disabled = !isAdmin();
+      $("#restore-teams").disabled = !isAdmin();
+      $("#reset-all").disabled = !isAdmin();
       $("#players-list").innerHTML = state.players.length ? state.players.map((player, index) => `
         <div class="team-chip">
           <span>${index + 1}. ${escapeHtml(player.name)}</span>
-          <button class="secondary" data-remove-player="${player.id}" title="Remove">Remove</button>
+          <button class="secondary" data-remove-player="${player.id}" title="Remove" ${isAdmin() ? "" : "disabled"}>Remove</button>
         </div>
       `).join("") : `<p class="muted">No players yet.</p>`;
       $all("[data-remove-player]").forEach(button => button.addEventListener("click", () => {
         removePlayer(button.dataset.removePlayer);
       }));
-      $("#start-draft").disabled = state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4;
+      $("#start-draft").disabled = !isAdmin() || state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4;
     }
 
     function renderDraft() {
@@ -668,7 +773,7 @@
       const current = state.players.find(p => p.id === currentId);
       $("#draft-status").textContent = !state.draftStarted ? "Not started" : done ? "Draft complete" : `Pick ${state.picks.length + 1} of ${order.length}`;
       $("#current-picker").textContent = current && !done ? `${current.name} is picking` : done ? "Draft complete" : "Start the draft from Setup";
-      $("#undo-pick").disabled = state.picks.length === 0;
+      $("#undo-pick").disabled = state.picks.length === 0 || !isAdmin();
       const notice = $("#draft-notice");
       notice.classList.toggle("hidden", state.draftStarted);
       notice.textContent = "Start the draft from Setup after adding players.";
@@ -689,7 +794,7 @@
       $("#available-teams").innerHTML = state.teams
         .filter(t => !q || t.name.toLowerCase().includes(q) || t.group.toLowerCase().includes(q))
         .map(team => `
-          <button class="team-button" data-pick-team="${escapeHtml(team.name)}" ${selected.has(team.name) || !state.draftStarted || done ? "disabled" : ""}>
+          <button class="team-button" data-pick-team="${escapeHtml(team.name)}" ${selected.has(team.name) || !state.draftStarted || done || !canDraftCurrent() ? "disabled" : ""}>
             <span>${escapeHtml(team.name)}</span><small>${escapeHtml(team.group)}</small>
           </button>
         `).join("");
@@ -700,17 +805,19 @@
       $("#scoring-body").innerHTML = state.rounds.map(round => `
         <tr>
           <td><strong>${escapeHtml(round.label)}</strong></td>
-          <td><input type="number" min="0" step="1" value="${round.win}" data-score="${round.id}:win" /></td>
-          <td><input type="number" min="0" step="1" value="${round.tie}" data-score="${round.id}:tie" /></td>
+          <td><input type="number" min="0" step="1" value="${round.win}" data-score="${round.id}:win" ${isAdmin() ? "" : "disabled"} /></td>
+          <td><input type="number" min="0" step="1" value="${round.tie}" data-score="${round.id}:tie" ${isAdmin() ? "" : "disabled"} /></td>
         </tr>
       `).join("");
       $all("[data-score]").forEach(input => input.addEventListener("input", () => {
+        if (!isAdmin()) return;
         const [id, key] = input.dataset.score.split(":");
         const round = state.rounds.find(r => r.id === id);
         round[key] = Number(input.value || 0);
         renderResults();
         renderLeaderboard();
         save();
+        publishRoomState();
       }));
     }
 
@@ -735,20 +842,22 @@
             <td><strong>${escapeHtml(pick.team)}</strong><div class="muted">Group ${escapeHtml(pick.group || "")}</div></td>
             <td>${escapeHtml(pick.player)}</td>
             ${state.rounds.map(r => `
-              <td><input type="number" min="0" step="1" value="${result[`${r.id}Wins`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Wins" /></td>
-              <td><input type="number" min="0" step="1" value="${result[`${r.id}Ties`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Ties" /></td>
+              <td><input type="number" min="0" step="1" value="${result[`${r.id}Wins`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Wins" ${isAdmin() ? "" : "disabled"} /></td>
+              <td><input type="number" min="0" step="1" value="${result[`${r.id}Ties`] || 0}" data-result="${escapeHtml(pick.team)}:${r.id}Ties" ${isAdmin() ? "" : "disabled"} /></td>
             `).join("")}
             <td class="right"><strong>${teamScore(pick.team)}</strong></td>
           </tr>
         `;
       }).join("") : `<tr><td colspan="${3 + state.rounds.length * 2}">No drafted teams yet.</td></tr>`;
       $all("[data-result]").forEach(input => input.addEventListener("input", () => {
+        if (!isAdmin()) return;
         const [team, field] = input.dataset.result.split(":");
         state.results[team] = state.results[team] || {};
         state.results[team][field] = Number(input.value || 0);
         renderResults();
         renderLeaderboard();
         save();
+        publishRoomState();
       }));
     }
 
@@ -770,6 +879,128 @@
           <div class="right"><strong>${player.score}</strong><div class="muted">pts</div></div>
         </div>
       `).join("") : `<div class="notice">Add players in Setup to build the leaderboard.</div>`;
+    }
+
+    function renderRoom() {
+      $("#supabase-url").value = supabaseConfig.url || "";
+      $("#supabase-key").value = supabaseConfig.anonKey || "";
+      $("#room-code").value = room.code || "";
+      $("#room-token").value = room.token || "";
+      $("#room-status").textContent = room.connected ? `${room.role}${room.code ? " " + room.code : ""}` : "Offline";
+      const links = [];
+      if (room.connected && room.code && room.token && room.role === "admin") {
+        links.push(`<div class="team-chip"><span>Admin link</span><button class="secondary" data-copy-link="${escapeHtml(buildRoomLink(room.code, room.token))}">Copy</button></div>`);
+        if (room.spectatorToken) links.push(`<div class="team-chip"><span>Spectator link</span><button class="secondary" data-copy-link="${escapeHtml(buildRoomLink(room.code, room.spectatorToken))}">Copy</button></div>`);
+        room.playerLinks.forEach(player => {
+          links.push(`<div class="team-chip"><span>${escapeHtml(player.name)}</span><button class="secondary" data-copy-link="${escapeHtml(buildRoomLink(room.code, player.token))}">Copy</button></div>`);
+        });
+      } else if (room.connected) {
+        links.push(`<p class="muted">You are connected as ${escapeHtml(room.playerName || room.role)}.</p>`);
+      } else {
+        links.push(`<p class="muted">Create or join a room after adding your Supabase connection. Admins get shareable player links after the room is created.</p>`);
+      }
+      $("#room-links").innerHTML = links.join("");
+      $all("[data-copy-link]").forEach(button => button.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(button.dataset.copyLink);
+        button.textContent = "Copied";
+        setTimeout(() => button.textContent = "Copy", 1000);
+      }));
+    }
+
+    function showRoomMessage(message) {
+      const box = $("#room-message");
+      box.textContent = message;
+      box.classList.remove("hidden");
+    }
+
+    function buildRoomLink(code, token) {
+      return `${location.origin}${location.pathname}?room=${encodeURIComponent(code)}&token=${encodeURIComponent(token)}`;
+    }
+
+    function randomToken() {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function supabaseRpc(name, body) {
+      if (!supabaseConfig.url || !supabaseConfig.anonKey) throw new Error("Add your Supabase URL and anon key first.");
+      const response = await fetch(`${supabaseConfig.url.replace(/\/$/, "")}/rest/v1/rpc/${name}`, {
+        method: "POST",
+        headers: {
+          apikey: supabaseConfig.anonKey,
+          Authorization: `Bearer ${supabaseConfig.anonKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : null;
+      if (!response.ok) throw new Error(data?.message || data?.error || "Supabase request failed.");
+      return data;
+    }
+
+    function applyRoomPayload(payload) {
+      Object.assign(state, freshState(), payload.state || {});
+      state.rounds = mergeRounds(state.rounds || DEFAULT_ROUNDS);
+      room.connected = true;
+      room.role = payload.role;
+      room.playerId = payload.player_id || null;
+      room.playerName = payload.player_name || "";
+      room.playerLinks = payload.player_links || [];
+      room.spectatorToken = payload.spectator_token || room.spectatorToken || "";
+      saveRoom();
+      render();
+    }
+
+    async function joinRoom() {
+      const code = $("#room-code").value.trim().toUpperCase();
+      const token = $("#room-token").value.trim();
+      if (!code || !token) return showRoomMessage("Enter a room code and access key.");
+      const payload = await supabaseRpc("wc_pool_get_room", { p_code: code, p_token: token });
+      room.code = code;
+      room.token = token;
+      applyRoomPayload(payload);
+      startRoomPolling();
+      showRoomMessage("Connected to the live room.");
+    }
+
+    async function createRoom() {
+      if (state.players.length < 2) return showRoomMessage("Add at least 2 players before creating a live room.");
+      const adminToken = randomToken();
+      const spectatorToken = randomToken();
+      const payload = await supabaseRpc("wc_pool_create_room", { p_state: state, p_admin_token: adminToken, p_spectator_token: spectatorToken });
+      room.code = payload.code;
+      room.token = adminToken;
+      room.spectatorToken = spectatorToken;
+      applyRoomPayload(payload);
+      startRoomPolling();
+      showRoomMessage("Live room created. Copy the player links below.");
+    }
+
+    async function publishRoomState() {
+      if (!room.connected || room.role !== "admin") return;
+      try {
+        const payload = await supabaseRpc("wc_pool_admin_save_state", { p_code: room.code, p_token: room.token, p_state: state });
+        applyRoomPayload(payload);
+      } catch (error) {
+        showRoomMessage(error.message);
+      }
+    }
+
+    async function refreshRoom() {
+      if (!room.connected || !room.code || !room.token) return;
+      try {
+        const payload = await supabaseRpc("wc_pool_get_room", { p_code: room.code, p_token: room.token });
+        applyRoomPayload(payload);
+      } catch (error) {
+        showRoomMessage(error.message);
+      }
+    }
+
+    function startRoomPolling() {
+      if (roomTimer) clearInterval(roomTimer);
+      if (room.connected) roomTimer = setInterval(refreshRoom, 2500);
     }
 
     function renderSyncStatus(message) {
@@ -807,6 +1038,7 @@
       state.autoMeta = feed.meta || { updatedAt: new Date().toISOString() };
       save();
       render();
+      publishRoomState();
     }
 
     async function syncLiveResults(showSuccess = true) {
@@ -837,13 +1069,23 @@
       render();
     }
 
-    function makePick(teamName) {
+    async function makePick(teamName) {
       const playerId = currentPlayerId();
       const player = state.players.find(p => p.id === playerId);
       const team = state.teams.find(t => t.name === teamName);
       if (!player || !team || pickedTeams().has(teamName)) return;
+      if (room.connected && room.role === "player") {
+        try {
+          const payload = await supabaseRpc("wc_pool_player_make_pick", { p_code: room.code, p_token: room.token, p_team: team.name });
+          applyRoomPayload(payload);
+        } catch (error) {
+          showRoomMessage(error.message);
+        }
+        return;
+      }
       state.picks.push({ playerId, team: team.name, group: team.group });
       render();
+      publishRoomState();
     }
 
     $("#add-player").addEventListener("click", () => {
@@ -852,6 +1094,7 @@
       state.players.push({ id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()), name });
       $("#player-name").value = "";
       render();
+      publishRoomState();
     });
 
     $("#player-name").addEventListener("keydown", event => {
@@ -869,11 +1112,13 @@
       });
       state.picks = state.picks.filter(p => state.teams.some(t => t.name === p.team));
       render();
+      publishRoomState();
     });
 
     $("#restore-teams").addEventListener("click", () => {
       state.teams = DEFAULT_TEAMS;
       render();
+      publishRoomState();
     });
 
     $("#start-draft").addEventListener("click", () => {
@@ -884,11 +1129,13 @@
       state.results = {};
       switchTab("draft");
       render();
+      publishRoomState();
     });
 
     $("#undo-pick").addEventListener("click", () => {
       state.picks.pop();
       render();
+      publishRoomState();
     });
 
     $("#team-search").addEventListener("input", renderDraft);
@@ -896,6 +1143,7 @@
     $("#restore-scoring").addEventListener("click", () => {
       state.rounds = DEFAULT_ROUNDS.map(r => ({ ...r }));
       render();
+      publishRoomState();
     });
 
     $("#sync-results").addEventListener("click", () => syncLiveResults(true));
@@ -911,6 +1159,7 @@
       if (!confirm("Clear players, draft picks, and scores?")) return;
       Object.assign(state, freshState());
       render();
+      publishRoomState();
     });
 
     $("#export-data").addEventListener("click", () => {
@@ -932,6 +1181,7 @@
         Object.assign(state, freshState(), imported);
         state.rounds = mergeRounds(state.rounds);
         render();
+        publishRoomState();
       } catch {
         alert("That file could not be imported.");
       }
@@ -947,6 +1197,33 @@
       setTimeout(() => $("#copy-standings").textContent = "Copy Standings", 1000);
     });
 
+    $("#save-supabase").addEventListener("click", () => {
+      supabaseConfig.url = $("#supabase-url").value.trim();
+      supabaseConfig.anonKey = $("#supabase-key").value.trim();
+      saveSupabaseConfig();
+      renderRoom();
+      showRoomMessage("Supabase connection saved in this browser.");
+    });
+
+    $("#create-room").addEventListener("click", () => createRoom().catch(error => showRoomMessage(error.message)));
+    $("#join-room").addEventListener("click", () => joinRoom().catch(error => showRoomMessage(error.message)));
+    $("#leave-room").addEventListener("click", () => {
+      Object.assign(room, { connected: false, role: "offline", playerId: null, playerName: "", playerLinks: [] });
+      saveRoom();
+      if (roomTimer) clearInterval(roomTimer);
+      render();
+    });
+
+    $("#copy-room-summary").addEventListener("click", async () => {
+      const lines = [];
+      if (room.connected && room.role === "admin") {
+        lines.push(`Admin: ${buildRoomLink(room.code, room.token)}`);
+        if (room.spectatorToken) lines.push(`Spectator: ${buildRoomLink(room.code, room.spectatorToken)}`);
+        room.playerLinks.forEach(player => lines.push(`${player.name}: ${buildRoomLink(room.code, player.token)}`));
+      }
+      await navigator.clipboard.writeText(lines.join("\n") || "No room links yet.");
+    });
+
     $all("nav button").forEach(button => {
       button.addEventListener("click", () => switchTab(button.dataset.tab));
     });
@@ -958,6 +1235,7 @@
 
     render();
     scheduleAutoSync();
+    if (room.code && room.token && supabaseConfig.url && supabaseConfig.anonKey) joinRoom().catch(() => renderRoom());
   </script>
 </body>
 </html>

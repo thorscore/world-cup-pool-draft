@@ -12,6 +12,7 @@ A free, static web app for running a 2026 World Cup draft pool.
 - Automatic leaderboard
 - Export/import pool data
 - Optional live result sync from football-data.org
+- Optional live draft rooms with player-only links through Supabase
 
 ## Hosting
 
@@ -31,3 +32,14 @@ The app can sync finished match results from football-data.org through GitHub Ac
 6. Go to **Actions > Update live World Cup results > Run workflow** once.
 
 After that, GitHub checks for finished matches every 30 minutes and publishes `live-results.json`. In the app, use **Sync Live Results** or turn on **Auto Sync**.
+
+## Optional live draft rooms
+
+For live drafting and limited player access, use the Supabase setup:
+
+1. Create a free Supabase project.
+2. Run `supabase/schema.sql` in the Supabase SQL Editor.
+3. Add the project URL and anon public key to `config.js`.
+4. Open the app, add players, then create the room from the **Room** tab.
+
+Full steps are in `supabase/setup.md`.
