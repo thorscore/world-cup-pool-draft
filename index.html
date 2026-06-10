@@ -484,10 +484,15 @@
       <div class="section-title">
         <div>
           <h2>Results</h2>
-          <p>Enter each drafted team&apos;s wins and ties by round. Scores update immediately.</p>
+          <p>Enter scores manually, or use the GitHub-updated live feed once an API token is configured.</p>
         </div>
-        <span class="pill" id="results-total">0 teams</span>
+        <div class="row">
+          <button class="secondary" id="sync-results">Sync Live Results</button>
+          <button class="secondary" id="toggle-auto-sync">Auto Sync Off</button>
+          <span class="pill" id="results-total">0 teams</span>
+        </div>
       </div>
+      <div id="sync-status" class="notice hidden"></div>
       <div class="box" style="overflow:auto;">
         <table class="results-table">
           <thead id="results-head"></thead>
@@ -539,6 +544,7 @@
 
     const STORAGE_KEY = "worldCupPoolDraft.v1";
     const state = loadState();
+    let syncTimer = null;
 
     function freshState() {
       return {
@@ -547,7 +553,9 @@
         rounds: DEFAULT_ROUNDS,
         picks: [],
         draftStarted: false,
-        results: {}
+        results: {},
+        autoSync: false,
+        autoMeta: null
       };
     }
 
@@ -709,6 +717,9 @@
     function renderResults() {
       const drafted = state.picks.map(pick => ({ ...pick, player: state.players.find(p => p.id === pick.playerId)?.name || "" }));
       $("#results-total").textContent = `${drafted.length} drafted team${drafted.length === 1 ? "" : "s"}`;
+      $("#toggle-auto-sync").textContent = state.autoSync ? "Auto Sync On" : "Auto Sync Off";
+      $("#toggle-auto-sync").classList.toggle("green", state.autoSync);
+      renderSyncStatus();
       $("#results-head").innerHTML = `
         <tr>
           <th>Team</th>
@@ -759,6 +770,62 @@
           <div class="right"><strong>${player.score}</strong><div class="muted">pts</div></div>
         </div>
       `).join("") : `<div class="notice">Add players in Setup to build the leaderboard.</div>`;
+    }
+
+    function renderSyncStatus(message) {
+      const box = $("#sync-status");
+      if (!message && !state.autoMeta) {
+        box.classList.add("hidden");
+        return;
+      }
+      const updated = state.autoMeta?.updatedAt ? new Date(state.autoMeta.updatedAt).toLocaleString() : "";
+      const finished = Number(state.autoMeta?.finishedMatches || 0);
+      box.classList.remove("hidden");
+      box.textContent = message || `Live feed loaded${updated ? " " + updated : ""}. Finished matches counted: ${finished}.`;
+    }
+
+    function normalizeName(name) {
+      return String(name || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\b(CF|FC|SC|AFC|National Team)\b/gi, "")
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/gi, " ")
+        .trim()
+        .toLowerCase();
+    }
+
+    function applyLiveResults(feed) {
+      if (!feed || !feed.results) throw new Error("No results were found in the live feed.");
+      const knownTeams = new Map(state.teams.map(team => [normalizeName(team.name), team.name]));
+      const nextResults = {};
+      Object.entries(feed.results).forEach(([feedName, result]) => {
+        const teamName = knownTeams.get(normalizeName(feedName)) || feedName;
+        nextResults[teamName] = result;
+      });
+      state.results = nextResults;
+      state.autoMeta = feed.meta || { updatedAt: new Date().toISOString() };
+      save();
+      render();
+    }
+
+    async function syncLiveResults(showSuccess = true) {
+      try {
+        renderSyncStatus("Checking the live results feed...");
+        const response = await fetch(`live-results.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) throw new Error("Live results are not published yet.");
+        applyLiveResults(await response.json());
+        if (showSuccess) renderSyncStatus("Live results synced.");
+      } catch (error) {
+        renderSyncStatus(`${error.message} Add FOOTBALL_DATA_TOKEN in GitHub Secrets, then run the update workflow.`);
+      }
+    }
+
+    function scheduleAutoSync() {
+      if (syncTimer) clearInterval(syncTimer);
+      if (!state.autoSync) return;
+      syncLiveResults(false);
+      syncTimer = setInterval(() => syncLiveResults(false), 5 * 60 * 1000);
     }
 
     function removePlayer(id) {
@@ -831,6 +898,15 @@
       render();
     });
 
+    $("#sync-results").addEventListener("click", () => syncLiveResults(true));
+
+    $("#toggle-auto-sync").addEventListener("click", () => {
+      state.autoSync = !state.autoSync;
+      save();
+      render();
+      scheduleAutoSync();
+    });
+
     $("#reset-all").addEventListener("click", () => {
       if (!confirm("Clear players, draft picks, and scores?")) return;
       Object.assign(state, freshState());
@@ -881,6 +957,7 @@
     }
 
     render();
+    scheduleAutoSync();
   </script>
 </body>
 </html>
