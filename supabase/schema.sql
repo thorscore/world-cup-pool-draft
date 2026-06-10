@@ -1,4 +1,4 @@
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create table if not exists public.wc_pool_rooms (
   id uuid primary key default gen_random_uuid(),
@@ -13,7 +13,7 @@ create table if not exists public.wc_pool_players (
   pool_id uuid not null references public.wc_pool_rooms(id) on delete cascade,
   player_id text not null,
   name text not null,
-  token text not null default encode(gen_random_bytes(16), 'hex'),
+  token text not null default encode(extensions.gen_random_bytes(16), 'hex'),
   primary key (pool_id, player_id),
   unique (pool_id, token)
 );
@@ -94,7 +94,7 @@ begin
   end if;
 
   loop
-    new_code := upper(substr(encode(gen_random_bytes(4), 'hex'), 1, 6));
+    new_code := upper(substr(encode(extensions.gen_random_bytes(4), 'hex'), 1, 6));
     begin
       insert into public.wc_pool_rooms (code, admin_token, spectator_token, state)
       values (new_code, p_admin_token, p_spectator_token, p_state)
