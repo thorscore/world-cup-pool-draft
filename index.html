@@ -744,6 +744,10 @@
       return room.role === "player" && currentPlayerId() === room.playerId;
     }
 
+    function canStartDraft() {
+      return isAdmin() && state.players.length >= 2 && state.players.length <= 12 && state.teams.length >= state.players.length * 4;
+    }
+
     function renderSetup() {
       $("#setup-count").textContent = `${state.players.length} player${state.players.length === 1 ? "" : "s"}`;
       $("#teams-input").value = teamText(state.teams);
@@ -763,7 +767,7 @@
       $all("[data-remove-player]").forEach(button => button.addEventListener("click", () => {
         removePlayer(button.dataset.removePlayer);
       }));
-      $("#start-draft").disabled = !isAdmin() || state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4;
+      $("#start-draft").disabled = !canStartDraft();
     }
 
     function renderDraft() {
@@ -772,15 +776,18 @@
       const currentId = currentPlayerId();
       const current = state.players.find(p => p.id === currentId);
       $("#draft-status").textContent = !state.draftStarted ? "Not started" : done ? "Draft complete" : `Pick ${state.picks.length + 1} of ${order.length}`;
-      $("#current-picker").textContent = current && !done ? `${current.name} is picking` : done ? "Draft complete" : "Start the draft from Setup";
+      $("#current-picker").textContent = !state.draftStarted ? "Draft not started" : current && !done ? `${current.name} is picking` : done ? "Draft complete" : "Start the draft";
       $("#undo-pick").disabled = state.picks.length === 0 || !isAdmin();
       const notice = $("#draft-notice");
       notice.classList.toggle("hidden", state.draftStarted);
-      notice.textContent = "Start the draft from Setup after adding players.";
+      notice.innerHTML = isAdmin()
+        ? `Start the draft when your player list is ready. <button class="green" id="start-draft-inline" ${canStartDraft() ? "" : "disabled"}>Start Draft</button>`
+        : "The admin needs to start the draft before teams can be selected.";
+      $("#start-draft-inline")?.addEventListener("click", startDraft);
       $("#draft-board").innerHTML = state.players.map(player => {
         const picks = state.picks.filter(p => p.playerId === player.id);
         return `
-          <article class="player-card ${player.id === currentId && !done ? "current" : ""}">
+          <article class="player-card ${state.draftStarted && player.id === currentId && !done ? "current" : ""}">
             <div class="player-head">
               <span>${escapeHtml(player.name)}</span>
               <span class="pill">${picks.length}/4</span>
@@ -1088,6 +1095,17 @@
       publishRoomState();
     }
 
+    function startDraft() {
+      if (!canStartDraft()) return;
+      if (state.picks.length && !confirm("Restart the draft and clear existing picks?")) return;
+      state.draftStarted = true;
+      state.picks = [];
+      state.results = {};
+      switchTab("draft");
+      render();
+      publishRoomState();
+    }
+
     $("#add-player").addEventListener("click", () => {
       const name = $("#player-name").value.trim();
       if (!name || state.players.length >= 12) return;
@@ -1121,16 +1139,7 @@
       publishRoomState();
     });
 
-    $("#start-draft").addEventListener("click", () => {
-      if (state.players.length < 2 || state.players.length > 12 || state.teams.length < state.players.length * 4) return;
-      if (state.picks.length && !confirm("Restart the draft and clear existing picks?")) return;
-      state.draftStarted = true;
-      state.picks = [];
-      state.results = {};
-      switchTab("draft");
-      render();
-      publishRoomState();
-    });
+    $("#start-draft").addEventListener("click", startDraft);
 
     $("#undo-pick").addEventListener("click", () => {
       state.picks.pop();
