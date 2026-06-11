@@ -3,10 +3,14 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-11T21:35:15.283Z",
+    "updatedAt": "2026-06-11T23:23:47.929Z",
     "finishedMatches": 1
   },
-  "results": {},
+  "results": {
+    "Mexico": {
+      "groupWins": 1
+    }
+  },
   "matches": [
     {
       "id": 537327,
@@ -14,10 +18,10 @@
       "stage": "GROUP_STAGE",
       "home": "Mexico",
       "away": "South Africa",
-      "winner": null,
+      "winner": "HOME_TEAM",
       "score": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 0
       }
     }
   ]
