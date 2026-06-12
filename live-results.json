@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-12T19:30:38.364Z",
-    "finishedMatches": 2
+    "updatedAt": "2026-06-12T21:46:53.157Z",
+    "finishedMatches": 3
   },
   "results": {
     "Mexico": {
@@ -12,6 +12,12 @@
     },
     "South Korea": {
       "groupWins": 1
+    },
+    "Canada": {
+      "groupTies": 1
+    },
+    "Bosnia-H.": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -36,6 +42,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": 537333,
+      "utcDate": "2026-06-12T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Canada",
+      "away": "Bosnia-H.",
+      "winner": "DRAW",
+      "score": {
+        "home": 1,
         "away": 1
       }
     }
