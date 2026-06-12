@@ -3,11 +3,14 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-12T01:57:05.668Z",
-    "finishedMatches": 1
+    "updatedAt": "2026-06-12T06:50:05.459Z",
+    "finishedMatches": 2
   },
   "results": {
     "Mexico": {
+      "groupWins": 1
+    },
+    "South Korea": {
       "groupWins": 1
     }
   },
@@ -22,6 +25,18 @@
       "score": {
         "home": 2,
         "away": 0
+      }
+    },
+    {
+      "id": 537328,
+      "utcDate": "2026-06-12T02:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "South Korea",
+      "away": "Czechia",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 1
       }
     }
   ]
