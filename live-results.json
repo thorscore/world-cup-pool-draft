@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-13T01:38:07.902Z",
-    "finishedMatches": 3
+    "updatedAt": "2026-06-13T06:18:51.872Z",
+    "finishedMatches": 4
   },
   "results": {
     "Mexico": {
@@ -18,6 +18,9 @@
     },
     "Bosnia-H.": {
       "groupTies": 1
+    },
+    "United States": {
+      "groupWins": 1
     }
   },
   "matches": [
@@ -54,6 +57,18 @@
       "winner": "DRAW",
       "score": {
         "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": 537345,
+      "utcDate": "2026-06-13T01:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "United States",
+      "away": "Paraguay",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 4,
         "away": 1
       }
     }
