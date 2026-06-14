@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-14T17:57:42.444Z",
-    "finishedMatches": 8,
+    "updatedAt": "2026-06-14T19:49:29.902Z",
+    "finishedMatches": 9,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -39,6 +39,9 @@
       "groupWins": 1
     },
     "Australia": {
+      "groupWins": 1
+    },
+    "Germany": {
       "groupWins": 1
     }
   },
@@ -137,6 +140,18 @@
       "score": {
         "home": 2,
         "away": 0
+      }
+    },
+    {
+      "id": 537351,
+      "utcDate": "2026-06-14T17:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Germany",
+      "away": "Curaçao",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 7,
+        "away": 1
       }
     }
   ],
