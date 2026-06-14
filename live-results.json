@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-14T04:14:50.738Z",
-    "finishedMatches": 7,
+    "updatedAt": "2026-06-14T08:31:30.702Z",
+    "finishedMatches": 8,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -36,6 +36,9 @@
       "groupTies": 1
     },
     "Scotland": {
+      "groupWins": 1
+    },
+    "Australia": {
       "groupWins": 1
     }
   },
@@ -122,6 +125,18 @@
       "score": {
         "home": 0,
         "away": 1
+      }
+    },
+    {
+      "id": 537346,
+      "utcDate": "2026-06-14T04:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Australia",
+      "away": "Turkiye",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 0
       }
     }
   ],
