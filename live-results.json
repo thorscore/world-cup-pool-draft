@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-14T01:06:00.881Z",
-    "finishedMatches": 6,
+    "updatedAt": "2026-06-14T04:14:50.738Z",
+    "finishedMatches": 7,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -34,6 +34,9 @@
     },
     "Morocco": {
       "groupTies": 1
+    },
+    "Scotland": {
+      "groupWins": 1
     }
   },
   "matches": [
@@ -106,6 +109,18 @@
       "winner": "DRAW",
       "score": {
         "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": 537340,
+      "utcDate": "2026-06-14T01:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Haiti",
+      "away": "Scotland",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
         "away": 1
       }
     }
