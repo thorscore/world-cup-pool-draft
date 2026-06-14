@@ -72,6 +72,24 @@ function addResult(results, team, roundId, outcome) {
   }
 }
 
+function previousMatchesById() {
+  try {
+    const existing = JSON.parse(fs.readFileSync(OUT_FILE, "utf8"));
+    return new Map((existing.matches || []).filter(match => match.id).map(match => [match.id, match]));
+  } catch {
+    return new Map();
+  }
+}
+
+function winnerFromFullTime(score) {
+  const home = score?.home;
+  const away = score?.away;
+  if (typeof home !== "number" || typeof away !== "number") return null;
+  if (home > away) return "HOME_TEAM";
+  if (away > home) return "AWAY_TEAM";
+  return "DRAW";
+}
+
 async function main() {
   const response = await fetch(API_URL, { headers: { "X-Auth-Token": token } });
   if (!response.ok) {
@@ -83,6 +101,8 @@ async function main() {
   const matches = Array.isArray(data.matches) ? data.matches : [];
   const results = {};
   const countedMatches = [];
+  const pendingMatches = [];
+  const previous = previousMatchesById();
 
   for (const match of matches) {
     if (match.status !== "FINISHED") continue;
@@ -91,7 +111,21 @@ async function main() {
     const away = displayName(match.awayTeam);
     if (!home || !away) continue;
 
-    const winner = match.score?.winner;
+    const prior = previous.get(match.id);
+    const fullTime = match.score?.fullTime;
+    const winner = match.score?.winner || winnerFromFullTime(fullTime) || prior?.winner || null;
+    const score = fullTime?.home !== null && fullTime?.away !== null ? fullTime : prior?.score || null;
+    if (!winner || !score) {
+      pendingMatches.push({
+        id: match.id,
+        utcDate: match.utcDate,
+        stage: match.stage,
+        home,
+        away
+      });
+      continue;
+    }
+
     if (winner === "HOME_TEAM") {
       addResult(results, home, roundId, "win");
     } else if (winner === "AWAY_TEAM") {
@@ -108,7 +142,7 @@ async function main() {
       home,
       away,
       winner: winner || null,
-      score: match.score?.fullTime || null
+      score
     });
   }
 
@@ -118,10 +152,12 @@ async function main() {
       competition: "WC",
       season: 2026,
       updatedAt: new Date().toISOString(),
-      finishedMatches: countedMatches.length
+      finishedMatches: countedMatches.length,
+      pendingFinishedMatches: pendingMatches.length
     },
     results,
-    matches: countedMatches
+    matches: countedMatches,
+    pendingMatches
   };
 
   fs.writeFileSync(OUT_FILE, `${JSON.stringify(output, null, 2)}\n`);
