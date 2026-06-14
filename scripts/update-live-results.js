@@ -26,6 +26,9 @@ const TEAM_ALIASES = new Map([
   ["turkey", "Turkiye"],
   ["cote d ivoire", "Ivory Coast"],
   ["cote divoire", "Ivory Coast"],
+  ["bosnia h", "Bosnia and Herzegovina"],
+  ["bosnia herzegovina", "Bosnia and Herzegovina"],
+  ["bosnia and herzegovina", "Bosnia and Herzegovina"],
   ["congo dr", "DR Congo"],
   ["dr congo", "DR Congo"],
   ["korea republic", "South Korea"],
@@ -46,8 +49,12 @@ function normalizeName(name) {
 }
 
 function displayName(team) {
-  const raw = team?.shortName || team?.tla || team?.name || "";
-  return TEAM_ALIASES.get(normalizeName(raw)) || raw;
+  const options = [team?.shortName, team?.name, team?.tla].filter(Boolean);
+  for (const option of options) {
+    const alias = TEAM_ALIASES.get(normalizeName(option));
+    if (alias) return alias;
+  }
+  return options[0] || "";
 }
 
 function ensureTeam(results, team) {

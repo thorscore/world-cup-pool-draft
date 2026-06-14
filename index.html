@@ -1033,12 +1033,25 @@
         .toLowerCase();
     }
 
+    const LIVE_TEAM_ALIASES = new Map([
+      ["bosnia h", "Bosnia and Herzegovina"],
+      ["bosnia herzegovina", "Bosnia and Herzegovina"],
+      ["bosnia and herzegovina", "Bosnia and Herzegovina"],
+      ["usa", "United States"],
+      ["united states of america", "United States"],
+      ["turkey", "Turkiye"],
+      ["turkiye", "Turkiye"],
+      ["korea republic", "South Korea"],
+      ["republic of korea", "South Korea"]
+    ]);
+
     function applyLiveResults(feed) {
       if (!feed || !feed.results) throw new Error("No results were found in the live feed.");
       const knownTeams = new Map(state.teams.map(team => [normalizeName(team.name), team.name]));
       const nextResults = {};
       Object.entries(feed.results).forEach(([feedName, result]) => {
-        const teamName = knownTeams.get(normalizeName(feedName)) || feedName;
+        const normalized = normalizeName(feedName);
+        const teamName = LIVE_TEAM_ALIASES.get(normalized) || knownTeams.get(normalized) || feedName;
         nextResults[teamName] = result;
       });
       state.results = nextResults;
