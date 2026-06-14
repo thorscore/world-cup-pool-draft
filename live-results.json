@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-14T21:14:38.939Z",
-    "finishedMatches": 9,
+    "updatedAt": "2026-06-14T22:41:56.829Z",
+    "finishedMatches": 10,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -43,6 +43,12 @@
     },
     "Germany": {
       "groupWins": 1
+    },
+    "Netherlands": {
+      "groupTies": 1
+    },
+    "Japan": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -152,6 +158,18 @@
       "score": {
         "home": 7,
         "away": 1
+      }
+    },
+    {
+      "id": 537357,
+      "utcDate": "2026-06-14T20:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Netherlands",
+      "away": "Japan",
+      "winner": "DRAW",
+      "score": {
+        "home": 2,
+        "away": 2
       }
     }
   ],
