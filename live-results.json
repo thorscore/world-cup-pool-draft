@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-15T00:12:10.846Z",
-    "finishedMatches": 10,
+    "updatedAt": "2026-06-15T05:37:35.642Z",
+    "finishedMatches": 12,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -49,6 +49,12 @@
     },
     "Japan": {
       "groupTies": 1
+    },
+    "Ivory Coast": {
+      "groupWins": 1
+    },
+    "Sweden": {
+      "groupWins": 1
     }
   },
   "matches": [
@@ -170,6 +176,30 @@
       "score": {
         "home": 2,
         "away": 2
+      }
+    },
+    {
+      "id": 537352,
+      "utcDate": "2026-06-14T23:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Ivory Coast",
+      "away": "Ecuador",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 1,
+        "away": 0
+      }
+    },
+    {
+      "id": 537358,
+      "utcDate": "2026-06-15T02:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Sweden",
+      "away": "Tunisia",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 5,
+        "away": 1
       }
     }
   ],
