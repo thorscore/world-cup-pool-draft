@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-15T17:31:44.119Z",
-    "finishedMatches": 12,
+    "updatedAt": "2026-06-15T20:57:05.484Z",
+    "finishedMatches": 13,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -55,6 +55,12 @@
     },
     "Sweden": {
       "groupWins": 1
+    },
+    "Spain": {
+      "groupTies": 1
+    },
+    "Cape Verde": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -200,6 +206,18 @@
       "score": {
         "home": 5,
         "away": 1
+      }
+    },
+    {
+      "id": 537369,
+      "utcDate": "2026-06-15T16:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Spain",
+      "away": "Cape Verde",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
+        "away": 0
       }
     }
   ],
