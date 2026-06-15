@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-15T20:57:05.484Z",
-    "finishedMatches": 13,
+    "updatedAt": "2026-06-15T23:06:15.213Z",
+    "finishedMatches": 14,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -60,6 +60,12 @@
       "groupTies": 1
     },
     "Cape Verde": {
+      "groupTies": 1
+    },
+    "Belgium": {
+      "groupTies": 1
+    },
+    "Egypt": {
       "groupTies": 1
     }
   },
@@ -218,6 +224,18 @@
       "score": {
         "home": 0,
         "away": 0
+      }
+    },
+    {
+      "id": 537363,
+      "utcDate": "2026-06-15T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Belgium",
+      "away": "Egypt",
+      "winner": "DRAW",
+      "score": {
+        "home": 1,
+        "away": 1
       }
     }
   ],
