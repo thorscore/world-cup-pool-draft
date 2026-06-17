@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-17T18:41:59.890Z",
-    "finishedMatches": 20,
+    "updatedAt": "2026-06-17T21:08:24.741Z",
+    "finishedMatches": 21,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -91,6 +91,12 @@
     },
     "Austria": {
       "groupWins": 1
+    },
+    "Portugal": {
+      "groupTies": 1
+    },
+    "DR Congo": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -331,6 +337,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 3,
+        "away": 1
+      }
+    },
+    {
+      "id": 537403,
+      "utcDate": "2026-06-17T17:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Portugal",
+      "away": "DR Congo",
+      "winner": "DRAW",
+      "score": {
+        "home": 1,
         "away": 1
       }
     }
