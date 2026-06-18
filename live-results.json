@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-18T16:35:03.338Z",
-    "finishedMatches": 24,
+    "updatedAt": "2026-06-18T19:30:16.460Z",
+    "finishedMatches": 25,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -106,6 +106,12 @@
     },
     "Colombia": {
       "groupWins": 1
+    },
+    "Czechia": {
+      "groupTies": 1
+    },
+    "South Africa": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -395,6 +401,18 @@
       "score": {
         "home": 1,
         "away": 3
+      }
+    },
+    {
+      "id": 537329,
+      "utcDate": "2026-06-18T16:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Czechia",
+      "away": "South Africa",
+      "winner": "DRAW",
+      "score": {
+        "home": 1,
+        "away": 1
       }
     }
   ],
