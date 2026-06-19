@@ -3,13 +3,13 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-19T00:09:31.342Z",
-    "finishedMatches": 27,
+    "updatedAt": "2026-06-19T05:33:46.011Z",
+    "finishedMatches": 28,
     "pendingFinishedMatches": 0
   },
   "results": {
     "Mexico": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "South Korea": {
       "groupWins": 1
@@ -438,6 +438,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 6,
+        "away": 0
+      }
+    },
+    {
+      "id": 537330,
+      "utcDate": "2026-06-19T01:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Mexico",
+      "away": "South Korea",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 1,
         "away": 0
       }
     }
