@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-19T20:51:53.846Z",
-    "finishedMatches": 28,
+    "updatedAt": "2026-06-19T22:04:42.400Z",
+    "finishedMatches": 29,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -22,7 +22,7 @@
       "groupTies": 1
     },
     "United States": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "Qatar": {
       "groupTies": 1
@@ -450,6 +450,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 1,
+        "away": 0
+      }
+    },
+    {
+      "id": 537348,
+      "utcDate": "2026-06-19T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "United States",
+      "away": "Australia",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
         "away": 0
       }
     }
