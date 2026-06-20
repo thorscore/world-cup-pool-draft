@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-20T03:51:22.957Z",
-    "finishedMatches": 31,
+    "updatedAt": "2026-06-20T07:51:52.005Z",
+    "finishedMatches": 32,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -116,6 +116,9 @@
     },
     "South Africa": {
       "groupTies": 1
+    },
+    "Paraguay": {
+      "groupWins": 1
     }
   },
   "matches": [
@@ -489,6 +492,18 @@
       "score": {
         "home": 3,
         "away": 0
+      }
+    },
+    {
+      "id": 537347,
+      "utcDate": "2026-06-20T03:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Turkiye",
+      "away": "Paraguay",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 1
       }
     }
   ],
