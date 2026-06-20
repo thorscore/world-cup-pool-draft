@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-20T21:19:38.151Z",
-    "finishedMatches": 33,
+    "updatedAt": "2026-06-20T22:42:26.868Z",
+    "finishedMatches": 34,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -46,7 +46,7 @@
       "groupWins": 1
     },
     "Germany": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "Netherlands": {
       "groupTies": 1,
@@ -516,6 +516,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 5,
+        "away": 1
+      }
+    },
+    {
+      "id": 537353,
+      "utcDate": "2026-06-20T20:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Germany",
+      "away": "Ivory Coast",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
         "away": 1
       }
     }
