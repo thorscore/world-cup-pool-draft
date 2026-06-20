@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-20T17:54:36.965Z",
-    "finishedMatches": 32,
+    "updatedAt": "2026-06-20T19:39:20.263Z",
+    "finishedMatches": 33,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -49,7 +49,8 @@
       "groupWins": 1
     },
     "Netherlands": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "Japan": {
       "groupTies": 1
@@ -503,6 +504,18 @@
       "winner": "AWAY_TEAM",
       "score": {
         "home": 0,
+        "away": 1
+      }
+    },
+    {
+      "id": 537359,
+      "utcDate": "2026-06-20T17:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Netherlands",
+      "away": "Sweden",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 5,
         "away": 1
       }
     }
