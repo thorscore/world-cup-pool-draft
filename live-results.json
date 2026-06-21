@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-21T00:08:37.608Z",
-    "finishedMatches": 34,
+    "updatedAt": "2026-06-21T05:25:28.127Z",
+    "finishedMatches": 35,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -120,6 +120,12 @@
     },
     "Paraguay": {
       "groupWins": 1
+    },
+    "Ecuador": {
+      "groupTies": 1
+    },
+    "Curaçao": {
+      "groupTies": 1
     }
   },
   "matches": [
@@ -529,6 +535,18 @@
       "score": {
         "home": 2,
         "away": 1
+      }
+    },
+    {
+      "id": 537354,
+      "utcDate": "2026-06-21T00:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Ecuador",
+      "away": "Curaçao",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
+        "away": 0
       }
     }
   ],
