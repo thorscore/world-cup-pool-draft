@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-21T05:25:28.127Z",
-    "finishedMatches": 35,
+    "updatedAt": "2026-06-21T09:08:32.931Z",
+    "finishedMatches": 36,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -53,7 +53,8 @@
       "groupWins": 1
     },
     "Japan": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "Ivory Coast": {
       "groupWins": 1
@@ -547,6 +548,18 @@
       "score": {
         "home": 0,
         "away": 0
+      }
+    },
+    {
+      "id": 537360,
+      "utcDate": "2026-06-21T04:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Tunisia",
+      "away": "Japan",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 4
       }
     }
   ],
