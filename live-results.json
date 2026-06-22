@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-22T18:47:13.594Z",
-    "finishedMatches": 40,
+    "updatedAt": "2026-06-22T21:31:45.860Z",
+    "finishedMatches": 41,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -95,7 +95,7 @@
       "groupWins": 1
     },
     "Argentina": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "Austria": {
       "groupWins": 1
@@ -610,6 +610,18 @@
       "score": {
         "home": 1,
         "away": 3
+      }
+    },
+    {
+      "id": 537399,
+      "utcDate": "2026-06-22T17:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Argentina",
+      "away": "Austria",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 0
       }
     }
   ],
