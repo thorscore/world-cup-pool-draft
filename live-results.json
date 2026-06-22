@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-21T23:15:16.886Z",
-    "finishedMatches": 38,
+    "updatedAt": "2026-06-22T02:02:05.328Z",
+    "finishedMatches": 39,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -67,7 +67,7 @@
       "groupWins": 1
     },
     "Cape Verde": {
-      "groupTies": 1
+      "groupTies": 2
     },
     "Belgium": {
       "groupTies": 2
@@ -79,7 +79,7 @@
       "groupTies": 1
     },
     "Uruguay": {
-      "groupTies": 1
+      "groupTies": 2
     },
     "Iran": {
       "groupTies": 2
@@ -585,6 +585,18 @@
       "score": {
         "home": 0,
         "away": 0
+      }
+    },
+    {
+      "id": 537372,
+      "utcDate": "2026-06-21T22:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Uruguay",
+      "away": "Cape Verde",
+      "winner": "DRAW",
+      "score": {
+        "home": 2,
+        "away": 2
       }
     }
   ],
