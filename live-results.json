@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-23T01:30:42.806Z",
-    "finishedMatches": 42,
+    "updatedAt": "2026-06-23T06:08:43.859Z",
+    "finishedMatches": 44,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -92,7 +92,7 @@
       "groupWins": 2
     },
     "Norway": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "Argentina": {
       "groupWins": 2
@@ -129,6 +129,9 @@
     },
     "Curaçao": {
       "groupTies": 1
+    },
+    "Algeria": {
+      "groupWins": 1
     }
   },
   "matches": [
@@ -634,6 +637,30 @@
       "score": {
         "home": 3,
         "away": 0
+      }
+    },
+    {
+      "id": 537394,
+      "utcDate": "2026-06-23T00:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Norway",
+      "away": "Senegal",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 2
+      }
+    },
+    {
+      "id": 537400,
+      "utcDate": "2026-06-23T03:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Jordan",
+      "away": "Algeria",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 2
       }
     }
   ],
