@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-23T20:33:28.616Z",
-    "finishedMatches": 45,
+    "updatedAt": "2026-06-23T22:14:50.802Z",
+    "finishedMatches": 46,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -108,10 +108,12 @@
       "groupTies": 1
     },
     "England": {
-      "groupWins": 1
+      "groupWins": 1,
+      "groupTies": 1
     },
     "Ghana": {
-      "groupWins": 1
+      "groupWins": 1,
+      "groupTies": 1
     },
     "Colombia": {
       "groupWins": 1
@@ -673,6 +675,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 5,
+        "away": 0
+      }
+    },
+    {
+      "id": 537411,
+      "utcDate": "2026-06-23T20:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "England",
+      "away": "Ghana",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
         "away": 0
       }
     }
