@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-23T18:20:40.956Z",
-    "finishedMatches": 44,
+    "updatedAt": "2026-06-23T20:33:28.616Z",
+    "finishedMatches": 45,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -101,7 +101,8 @@
       "groupWins": 1
     },
     "Portugal": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "DR Congo": {
       "groupTies": 1
@@ -661,6 +662,18 @@
       "score": {
         "home": 1,
         "away": 2
+      }
+    },
+    {
+      "id": 537405,
+      "utcDate": "2026-06-23T17:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Portugal",
+      "away": "Uzbekistan",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 5,
+        "away": 0
       }
     }
   ],
