@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-24T19:49:22.836Z",
-    "finishedMatches": 48,
+    "updatedAt": "2026-06-24T21:24:12.483Z",
+    "finishedMatches": 50,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -19,7 +19,8 @@
       "groupWins": 1
     },
     "Bosnia and Herzegovina": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "United States": {
       "groupWins": 2
@@ -29,7 +30,7 @@
     },
     "Switzerland": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 2
     },
     "Brazil": {
       "groupTies": 1,
@@ -715,6 +716,30 @@
       "score": {
         "home": 1,
         "away": 0
+      }
+    },
+    {
+      "id": 537337,
+      "utcDate": "2026-06-24T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Switzerland",
+      "away": "Canada",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": 537338,
+      "utcDate": "2026-06-24T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Bosnia and Herzegovina",
+      "away": "Qatar",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 1
       }
     }
   ],
