@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-23T23:35:39.002Z",
-    "finishedMatches": 46,
+    "updatedAt": "2026-06-24T03:42:47.145Z",
+    "finishedMatches": 47,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -134,6 +134,9 @@
       "groupTies": 1
     },
     "Algeria": {
+      "groupWins": 1
+    },
+    "Croatia": {
       "groupWins": 1
     }
   },
@@ -688,6 +691,18 @@
       "score": {
         "home": 0,
         "away": 0
+      }
+    },
+    {
+      "id": 537412,
+      "utcDate": "2026-06-23T23:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Panama",
+      "away": "Croatia",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 1
       }
     }
   ],
