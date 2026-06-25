@@ -3,13 +3,13 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-25T00:14:38.838Z",
-    "finishedMatches": 52,
+    "updatedAt": "2026-06-25T04:46:10.612Z",
+    "finishedMatches": 54,
     "pendingFinishedMatches": 0
   },
   "results": {
     "Mexico": {
-      "groupWins": 2
+      "groupWins": 3
     },
     "South Korea": {
       "groupWins": 1
@@ -123,7 +123,8 @@
       "groupTies": 1
     },
     "South Africa": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "Paraguay": {
       "groupWins": 1
@@ -764,6 +765,30 @@
       "score": {
         "home": 0,
         "away": 3
+      }
+    },
+    {
+      "id": 537331,
+      "utcDate": "2026-06-25T01:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Czechia",
+      "away": "Mexico",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 3
+      }
+    },
+    {
+      "id": 537332,
+      "utcDate": "2026-06-25T01:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "South Africa",
+      "away": "South Korea",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 1,
+        "away": 0
       }
     }
   ],
