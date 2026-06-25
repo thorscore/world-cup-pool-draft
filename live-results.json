@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-24T22:48:29.847Z",
-    "finishedMatches": 50,
+    "updatedAt": "2026-06-25T00:14:38.838Z",
+    "finishedMatches": 52,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -34,11 +34,11 @@
     },
     "Brazil": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 2
     },
     "Morocco": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 2
     },
     "Scotland": {
       "groupWins": 1
@@ -740,6 +740,30 @@
       "score": {
         "home": 3,
         "away": 1
+      }
+    },
+    {
+      "id": 537344,
+      "utcDate": "2026-06-24T22:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Morocco",
+      "away": "Haiti",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 4,
+        "away": 2
+      }
+    },
+    {
+      "id": 537343,
+      "utcDate": "2026-06-24T22:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Scotland",
+      "away": "Brazil",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 3
       }
     }
   ],
