@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-26T00:10:51.891Z",
-    "finishedMatches": 56,
+    "updatedAt": "2026-06-26T04:49:59.767Z",
+    "finishedMatches": 60,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -44,24 +44,26 @@
       "groupWins": 1
     },
     "Australia": {
-      "groupWins": 1
+      "groupWins": 1,
+      "groupTies": 1
     },
     "Germany": {
       "groupWins": 2
     },
     "Netherlands": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 2
     },
     "Japan": {
-      "groupTies": 1,
+      "groupTies": 2,
       "groupWins": 1
     },
     "Ivory Coast": {
       "groupWins": 2
     },
     "Sweden": {
-      "groupWins": 1
+      "groupWins": 1,
+      "groupTies": 1
     },
     "Spain": {
       "groupTies": 1,
@@ -127,7 +129,8 @@
       "groupWins": 1
     },
     "Paraguay": {
-      "groupWins": 1
+      "groupWins": 1,
+      "groupTies": 1
     },
     "Ecuador": {
       "groupTies": 1,
@@ -140,6 +143,9 @@
       "groupWins": 1
     },
     "Croatia": {
+      "groupWins": 1
+    },
+    "Turkiye": {
       "groupWins": 1
     }
   },
@@ -814,6 +820,54 @@
       "score": {
         "home": 0,
         "away": 2
+      }
+    },
+    {
+      "id": 537361,
+      "utcDate": "2026-06-25T23:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Tunisia",
+      "away": "Netherlands",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 3
+      }
+    },
+    {
+      "id": 537362,
+      "utcDate": "2026-06-25T23:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Japan",
+      "away": "Sweden",
+      "winner": "DRAW",
+      "score": {
+        "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": 537349,
+      "utcDate": "2026-06-26T02:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Turkiye",
+      "away": "United States",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 2
+      }
+    },
+    {
+      "id": 537350,
+      "utcDate": "2026-06-26T02:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Paraguay",
+      "away": "Australia",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
+        "away": 0
       }
     }
   ],
