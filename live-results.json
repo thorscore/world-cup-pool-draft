@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-26T20:47:36.756Z",
-    "finishedMatches": 60,
+    "updatedAt": "2026-06-26T22:15:22.181Z",
+    "finishedMatches": 62,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -92,7 +92,7 @@
       "groupTies": 1
     },
     "France": {
-      "groupWins": 2
+      "groupWins": 3
     },
     "Norway": {
       "groupWins": 2
@@ -146,6 +146,9 @@
       "groupWins": 1
     },
     "Turkiye": {
+      "groupWins": 1
+    },
+    "Senegal": {
       "groupWins": 1
     }
   },
@@ -867,6 +870,30 @@
       "winner": "DRAW",
       "score": {
         "home": 0,
+        "away": 0
+      }
+    },
+    {
+      "id": 537395,
+      "utcDate": "2026-06-26T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Norway",
+      "away": "France",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 4
+      }
+    },
+    {
+      "id": 537396,
+      "utcDate": "2026-06-26T19:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Senegal",
+      "away": "Iraq",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 5,
         "away": 0
       }
     }
