@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-27T22:04:21.412Z",
-    "finishedMatches": 66,
+    "updatedAt": "2026-06-27T23:34:06.932Z",
+    "finishedMatches": 68,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -112,7 +112,7 @@
       "groupTies": 1
     },
     "England": {
-      "groupWins": 1,
+      "groupWins": 2,
       "groupTies": 1
     },
     "Ghana": {
@@ -144,7 +144,7 @@
       "groupWins": 1
     },
     "Croatia": {
-      "groupWins": 1
+      "groupWins": 2
     },
     "Turkiye": {
       "groupWins": 1
@@ -943,6 +943,30 @@
       "winner": "DRAW",
       "score": {
         "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": 537413,
+      "utcDate": "2026-06-27T21:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Panama",
+      "away": "England",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 2
+      }
+    },
+    {
+      "id": 537414,
+      "utcDate": "2026-06-27T21:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Croatia",
+      "away": "Ghana",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
         "away": 1
       }
     }
