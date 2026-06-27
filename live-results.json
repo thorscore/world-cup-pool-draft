@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-26T23:43:09.994Z",
-    "finishedMatches": 62,
+    "updatedAt": "2026-06-27T03:35:30.842Z",
+    "finishedMatches": 64,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -67,10 +67,10 @@
     },
     "Spain": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 2
     },
     "Cape Verde": {
-      "groupTies": 2
+      "groupTies": 3
     },
     "Belgium": {
       "groupTies": 2
@@ -80,7 +80,7 @@
       "groupWins": 1
     },
     "Saudi Arabia": {
-      "groupTies": 1
+      "groupTies": 2
     },
     "Uruguay": {
       "groupTies": 2
@@ -894,6 +894,30 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 5,
+        "away": 0
+      }
+    },
+    {
+      "id": 537373,
+      "utcDate": "2026-06-27T00:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Uruguay",
+      "away": "Spain",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 1
+      }
+    },
+    {
+      "id": 537374,
+      "utcDate": "2026-06-27T00:00:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Cape Verde",
+      "away": "Saudi Arabia",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
         "away": 0
       }
     }
