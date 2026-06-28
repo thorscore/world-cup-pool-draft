@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-28T20:14:45.553Z",
-    "finishedMatches": 72,
+    "updatedAt": "2026-06-28T21:38:09.245Z",
+    "finishedMatches": 73,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -16,7 +16,8 @@
     },
     "Canada": {
       "groupTies": 1,
-      "groupWins": 1
+      "groupWins": 1,
+      "r32Wins": 1
     },
     "Bosnia and Herzegovina": {
       "groupTies": 1,
@@ -1020,6 +1021,18 @@
       "score": {
         "home": 3,
         "away": 3
+      }
+    },
+    {
+      "id": 537417,
+      "utcDate": "2026-06-28T19:00:00Z",
+      "stage": "LAST_32",
+      "home": "South Africa",
+      "away": "Canada",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 1
       }
     }
   ],
