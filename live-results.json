@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-27T23:34:06.932Z",
-    "finishedMatches": 68,
+    "updatedAt": "2026-06-28T03:58:39.364Z",
+    "finishedMatches": 70,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -105,11 +105,12 @@
       "groupWins": 1
     },
     "Portugal": {
-      "groupTies": 1,
+      "groupTies": 2,
       "groupWins": 1
     },
     "DR Congo": {
-      "groupTies": 1
+      "groupTies": 1,
+      "groupWins": 1
     },
     "England": {
       "groupWins": 2,
@@ -120,7 +121,8 @@
       "groupTies": 1
     },
     "Colombia": {
-      "groupWins": 2
+      "groupWins": 2,
+      "groupTies": 1
     },
     "Czechia": {
       "groupTies": 1
@@ -967,6 +969,30 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": 537407,
+      "utcDate": "2026-06-27T23:30:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "Colombia",
+      "away": "Portugal",
+      "winner": "DRAW",
+      "score": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    {
+      "id": 537408,
+      "utcDate": "2026-06-27T23:30:00Z",
+      "stage": "GROUP_STAGE",
+      "home": "DR Congo",
+      "away": "Uzbekistan",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
         "away": 1
       }
     }
