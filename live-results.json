@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-29T18:29:19.485Z",
-    "finishedMatches": 73,
+    "updatedAt": "2026-06-29T20:28:12.321Z",
+    "finishedMatches": 74,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -35,7 +35,8 @@
     },
     "Brazil": {
       "groupTies": 1,
-      "groupWins": 2
+      "groupWins": 2,
+      "r32Wins": 1
     },
     "Morocco": {
       "groupTies": 1,
@@ -1032,6 +1033,18 @@
       "winner": "AWAY_TEAM",
       "score": {
         "home": 0,
+        "away": 1
+      }
+    },
+    {
+      "id": 537423,
+      "utcDate": "2026-06-29T17:00:00Z",
+      "stage": "LAST_32",
+      "home": "Brazil",
+      "away": "Japan",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
         "away": 1
       }
     }
