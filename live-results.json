@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-30T00:15:13.721Z",
-    "finishedMatches": 75,
+    "updatedAt": "2026-06-30T04:45:30.312Z",
+    "finishedMatches": 76,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -40,7 +40,8 @@
     },
     "Morocco": {
       "groupTies": 1,
-      "groupWins": 2
+      "groupWins": 2,
+      "r32Ties": 1
     },
     "Scotland": {
       "groupWins": 1
@@ -54,7 +55,8 @@
     },
     "Netherlands": {
       "groupTies": 1,
-      "groupWins": 2
+      "groupWins": 2,
+      "r32Ties": 1
     },
     "Japan": {
       "groupTies": 2,
@@ -1057,8 +1059,20 @@
       "away": "Paraguay",
       "winner": "AWAY_TEAM",
       "score": {
-        "home": 5,
-        "away": 6
+        "home": 4,
+        "away": 5
+      }
+    },
+    {
+      "id": 537418,
+      "utcDate": "2026-06-30T01:00:00Z",
+      "stage": "LAST_32",
+      "home": "Netherlands",
+      "away": "Morocco",
+      "winner": "DRAW",
+      "score": {
+        "home": 4,
+        "away": 4
       }
     }
   ],
