@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-29T22:59:53.014Z",
-    "finishedMatches": 74,
+    "updatedAt": "2026-06-30T00:15:13.721Z",
+    "finishedMatches": 75,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -136,7 +136,8 @@
     },
     "Paraguay": {
       "groupWins": 1,
-      "groupTies": 1
+      "groupTies": 1,
+      "r32Wins": 1
     },
     "Ecuador": {
       "groupTies": 1,
@@ -1046,6 +1047,18 @@
       "score": {
         "home": 2,
         "away": 1
+      }
+    },
+    {
+      "id": 537415,
+      "utcDate": "2026-06-29T20:30:00Z",
+      "stage": "LAST_32",
+      "home": "Germany",
+      "away": "Paraguay",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 5,
+        "away": 6
       }
     }
   ],
