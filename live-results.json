@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-30T18:57:23.433Z",
-    "finishedMatches": 76,
+    "updatedAt": "2026-06-30T21:00:53.946Z",
+    "finishedMatches": 77,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -99,7 +99,8 @@
       "groupWins": 3
     },
     "Norway": {
-      "groupWins": 2
+      "groupWins": 2,
+      "r32Wins": 1
     },
     "Argentina": {
       "groupWins": 3
@@ -1072,6 +1073,18 @@
       "score": {
         "home": 3,
         "away": 4
+      }
+    },
+    {
+      "id": 537424,
+      "utcDate": "2026-06-30T17:00:00Z",
+      "stage": "LAST_32",
+      "home": "Ivory Coast",
+      "away": "Norway",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 2
       }
     }
   ],
