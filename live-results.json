@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-01T17:28:28.608Z",
-    "finishedMatches": 79,
+    "updatedAt": "2026-07-01T19:20:03.380Z",
+    "finishedMatches": 80,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -121,7 +121,8 @@
     },
     "England": {
       "groupWins": 2,
-      "groupTies": 1
+      "groupTies": 1,
+      "r32Wins": 1
     },
     "Ghana": {
       "groupWins": 1,
@@ -1111,6 +1112,18 @@
       "score": {
         "home": 2,
         "away": 0
+      }
+    },
+    {
+      "id": 537426,
+      "utcDate": "2026-07-01T16:00:00Z",
+      "stage": "LAST_32",
+      "home": "England",
+      "away": "DR Congo",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 1
       }
     }
   ],
