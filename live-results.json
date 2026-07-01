@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-06-30T22:49:55.670Z",
-    "finishedMatches": 77,
+    "updatedAt": "2026-07-01T00:05:45.718Z",
+    "finishedMatches": 78,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -96,7 +96,8 @@
       "groupTies": 1
     },
     "France": {
-      "groupWins": 3
+      "groupWins": 3,
+      "r32Wins": 1
     },
     "Norway": {
       "groupWins": 2,
@@ -1085,6 +1086,18 @@
       "score": {
         "home": 1,
         "away": 2
+      }
+    },
+    {
+      "id": 537416,
+      "utcDate": "2026-06-30T21:00:00Z",
+      "stage": "LAST_32",
+      "home": "France",
+      "away": "Sweden",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 0
       }
     }
   ],
