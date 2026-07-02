@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-02T20:42:04.187Z",
-    "finishedMatches": 82,
+    "updatedAt": "2026-07-02T22:07:56.938Z",
+    "finishedMatches": 83,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -72,7 +72,8 @@
     },
     "Spain": {
       "groupTies": 1,
-      "groupWins": 2
+      "groupWins": 2,
+      "r32Wins": 1
     },
     "Cape Verde": {
       "groupTies": 3
@@ -1149,6 +1150,18 @@
       "winner": "HOME_TEAM",
       "score": {
         "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "id": 537420,
+      "utcDate": "2026-07-02T19:00:00Z",
+      "stage": "LAST_32",
+      "home": "Spain",
+      "away": "Austria",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
         "away": 0
       }
     }
