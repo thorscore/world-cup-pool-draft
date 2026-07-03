@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-03T19:41:01.782Z",
-    "finishedMatches": 85,
+    "updatedAt": "2026-07-03T21:08:32.658Z",
+    "finishedMatches": 86,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -86,7 +86,8 @@
     },
     "Egypt": {
       "groupTies": 2,
-      "groupWins": 1
+      "groupWins": 1,
+      "r32Wins": 1
     },
     "Saudi Arabia": {
       "groupTies": 2
@@ -1189,6 +1190,18 @@
       "score": {
         "home": 2,
         "away": 0
+      }
+    },
+    {
+      "id": 537428,
+      "utcDate": "2026-07-03T18:00:00Z",
+      "stage": "LAST_32",
+      "home": "Australia",
+      "away": "Egypt",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 3,
+        "away": 5
       }
     }
   ],
