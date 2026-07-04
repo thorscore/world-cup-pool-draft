@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-04T00:05:30.881Z",
-    "finishedMatches": 86,
+    "updatedAt": "2026-07-04T04:11:50.556Z",
+    "finishedMatches": 88,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -110,7 +110,8 @@
       "r32Wins": 1
     },
     "Argentina": {
-      "groupWins": 3
+      "groupWins": 3,
+      "r32Wins": 1
     },
     "Austria": {
       "groupWins": 1,
@@ -136,7 +137,8 @@
     },
     "Colombia": {
       "groupWins": 2,
-      "groupTies": 1
+      "groupTies": 1,
+      "r32Wins": 1
     },
     "Czechia": {
       "groupTies": 1
@@ -1202,6 +1204,30 @@
       "score": {
         "home": 3,
         "away": 5
+      }
+    },
+    {
+      "id": 537427,
+      "utcDate": "2026-07-03T22:00:00Z",
+      "stage": "LAST_32",
+      "home": "Argentina",
+      "away": "Cape Verde",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 2
+      }
+    },
+    {
+      "id": 537430,
+      "utcDate": "2026-07-04T01:30:00Z",
+      "stage": "LAST_32",
+      "home": "Colombia",
+      "away": "Ghana",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 1,
+        "away": 0
       }
     }
   ],
