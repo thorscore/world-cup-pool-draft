@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-04T17:34:27.798Z",
-    "finishedMatches": 88,
+    "updatedAt": "2026-07-04T19:15:32.128Z",
+    "finishedMatches": 89,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -43,7 +43,7 @@
     },
     "Morocco": {
       "groupTies": 1,
-      "groupWins": 2,
+      "groupWins": 3,
       "r32Wins": 1
     },
     "Scotland": {
@@ -1228,6 +1228,18 @@
       "score": {
         "home": 1,
         "away": 0
+      }
+    },
+    {
+      "id": 537376,
+      "utcDate": "2026-07-04T17:00:00Z",
+      "stage": "LAST_16",
+      "home": "Canada",
+      "away": "Morocco",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 3
       }
     }
   ],
