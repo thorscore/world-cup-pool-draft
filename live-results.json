@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-04T22:58:33.826Z",
-    "finishedMatches": 89,
+    "updatedAt": "2026-07-05T00:09:13.170Z",
+    "finishedMatches": 90,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -102,7 +102,7 @@
       "groupTies": 1
     },
     "France": {
-      "groupWins": 3,
+      "groupWins": 4,
       "r32Wins": 1
     },
     "Norway": {
@@ -1240,6 +1240,18 @@
       "score": {
         "home": 0,
         "away": 3
+      }
+    },
+    {
+      "id": 537375,
+      "utcDate": "2026-07-04T21:00:00Z",
+      "stage": "LAST_16",
+      "home": "Paraguay",
+      "away": "France",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 0,
+        "away": 1
       }
     }
   ],
