@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-05T21:02:03.356Z",
-    "finishedMatches": 90,
+    "updatedAt": "2026-07-05T22:30:44.030Z",
+    "finishedMatches": 91,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -106,7 +106,7 @@
       "r32Wins": 1
     },
     "Norway": {
-      "groupWins": 2,
+      "groupWins": 3,
       "r32Wins": 1
     },
     "Argentina": {
@@ -1252,6 +1252,18 @@
       "score": {
         "home": 0,
         "away": 1
+      }
+    },
+    {
+      "id": 537377,
+      "utcDate": "2026-07-05T20:00:00Z",
+      "stage": "LAST_16",
+      "home": "Brazil",
+      "away": "Norway",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 2
       }
     }
   ],
