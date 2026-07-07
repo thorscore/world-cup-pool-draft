@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-06T23:37:46.973Z",
-    "finishedMatches": 93,
+    "updatedAt": "2026-07-07T03:32:13.962Z",
+    "finishedMatches": 94,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -81,7 +81,7 @@
     },
     "Belgium": {
       "groupTies": 2,
-      "groupWins": 1,
+      "groupWins": 2,
       "r32Wins": 1
     },
     "Egypt": {
@@ -1288,6 +1288,18 @@
       "score": {
         "home": 0,
         "away": 1
+      }
+    },
+    {
+      "id": 537380,
+      "utcDate": "2026-07-07T00:00:00Z",
+      "stage": "LAST_16",
+      "home": "United States",
+      "away": "Belgium",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 4
       }
     }
   ],
