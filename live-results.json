@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-07T21:55:43.936Z",
-    "finishedMatches": 95,
+    "updatedAt": "2026-07-07T23:04:48.995Z",
+    "finishedMatches": 96,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -33,7 +33,7 @@
     },
     "Switzerland": {
       "groupTies": 1,
-      "groupWins": 2,
+      "groupWins": 3,
       "r32Wins": 1
     },
     "Brazil": {
@@ -1312,6 +1312,18 @@
       "score": {
         "home": 3,
         "away": 2
+      }
+    },
+    {
+      "id": 537382,
+      "utcDate": "2026-07-07T20:00:00Z",
+      "stage": "LAST_16",
+      "home": "Switzerland",
+      "away": "Colombia",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 4,
+        "away": 3
       }
     }
   ],
