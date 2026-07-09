@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-09T21:58:03.358Z",
-    "finishedMatches": 96,
+    "updatedAt": "2026-07-09T23:19:41.830Z",
+    "finishedMatches": 97,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -103,7 +103,8 @@
     },
     "France": {
       "groupWins": 4,
-      "r32Wins": 1
+      "r32Wins": 1,
+      "qfWins": 1
     },
     "Norway": {
       "groupWins": 3,
@@ -1324,6 +1325,18 @@
       "score": {
         "home": 4,
         "away": 3
+      }
+    },
+    {
+      "id": 537383,
+      "utcDate": "2026-07-09T20:00:00Z",
+      "stage": "QUARTER_FINALS",
+      "home": "France",
+      "away": "Morocco",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 0
       }
     }
   ],
