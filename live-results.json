@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-10T20:49:54.207Z",
-    "finishedMatches": 97,
+    "updatedAt": "2026-07-10T22:04:51.282Z",
+    "finishedMatches": 98,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -74,7 +74,8 @@
     "Spain": {
       "groupTies": 1,
       "groupWins": 3,
-      "r32Wins": 1
+      "r32Wins": 1,
+      "qfWins": 1
     },
     "Cape Verde": {
       "groupTies": 3
@@ -1337,6 +1338,18 @@
       "score": {
         "home": 2,
         "away": 0
+      }
+    },
+    {
+      "id": 537384,
+      "utcDate": "2026-07-10T19:00:00Z",
+      "stage": "QUARTER_FINALS",
+      "home": "Spain",
+      "away": "Belgium",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 2,
+        "away": 1
       }
     }
   ],
