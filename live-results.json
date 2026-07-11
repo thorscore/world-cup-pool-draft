@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-11T22:50:22.090Z",
-    "finishedMatches": 97,
+    "updatedAt": "2026-07-11T23:56:06.331Z",
+    "finishedMatches": 98,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -131,7 +131,8 @@
     "England": {
       "groupWins": 2,
       "groupTies": 1,
-      "r32Wins": 1
+      "r32Wins": 1,
+      "qfWins": 1
     },
     "Ghana": {
       "groupWins": 1,
@@ -1338,6 +1339,18 @@
       "score": {
         "home": 2,
         "away": 1
+      }
+    },
+    {
+      "id": 537385,
+      "utcDate": "2026-07-11T21:00:00Z",
+      "stage": "QUARTER_FINALS",
+      "home": "Norway",
+      "away": "England",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 1,
+        "away": 2
       }
     }
   ],
