@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-11T20:50:08.347Z",
-    "finishedMatches": 98,
+    "updatedAt": "2026-07-11T21:51:10.331Z",
+    "finishedMatches": 97,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -129,7 +129,7 @@
       "groupWins": 1
     },
     "England": {
-      "groupWins": 3,
+      "groupWins": 2,
       "groupTies": 1,
       "r32Wins": 1
     },
@@ -1266,18 +1266,6 @@
       "score": {
         "home": 1,
         "away": 2
-      }
-    },
-    {
-      "id": 537378,
-      "utcDate": "2026-07-06T01:00:00Z",
-      "stage": "LAST_16",
-      "home": "Mexico",
-      "away": "England",
-      "winner": "AWAY_TEAM",
-      "score": {
-        "home": 2,
-        "away": 3
       }
     },
     {
