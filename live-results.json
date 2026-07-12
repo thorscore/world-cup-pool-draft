@@ -3,8 +3,8 @@
     "source": "football-data.org",
     "competition": "WC",
     "season": 2026,
-    "updatedAt": "2026-07-12T03:20:07.461Z",
-    "finishedMatches": 98,
+    "updatedAt": "2026-07-12T06:17:45.810Z",
+    "finishedMatches": 100,
     "pendingFinishedMatches": 0
   },
   "results": {
@@ -113,7 +113,8 @@
     },
     "Argentina": {
       "groupWins": 4,
-      "r32Wins": 1
+      "r32Wins": 1,
+      "qfWins": 1
     },
     "Austria": {
       "groupWins": 1,
@@ -129,7 +130,7 @@
       "groupWins": 1
     },
     "England": {
-      "groupWins": 2,
+      "groupWins": 3,
       "groupTies": 1,
       "r32Wins": 1,
       "qfWins": 1
@@ -1270,6 +1271,18 @@
       }
     },
     {
+      "id": 537378,
+      "utcDate": "2026-07-06T01:00:00Z",
+      "stage": "LAST_16",
+      "home": "Mexico",
+      "away": "England",
+      "winner": "AWAY_TEAM",
+      "score": {
+        "home": 2,
+        "away": 3
+      }
+    },
+    {
       "id": 537379,
       "utcDate": "2026-07-06T19:00:00Z",
       "stage": "LAST_16",
@@ -1351,6 +1364,18 @@
       "score": {
         "home": 1,
         "away": 2
+      }
+    },
+    {
+      "id": 537386,
+      "utcDate": "2026-07-12T01:00:00Z",
+      "stage": "QUARTER_FINALS",
+      "home": "Argentina",
+      "away": "Switzerland",
+      "winner": "HOME_TEAM",
+      "score": {
+        "home": 3,
+        "away": 1
       }
     }
   ],
